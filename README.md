@@ -1,8 +1,8 @@
-# Docusaurus 2
+# Book: Health Informatics & Data Science
 
-This directory is a brief example of a [Docusaurus](https://v2.docusaurus.io) site that can be deployed to Vercel with zero configuration.
+This book is built with [Docusaurus](https://v2.docusaurus.io)
 
-## Deploy Your Own
+## Want to deploy/create your own?
 
 Deploy your own Docusaurus project with Vercel.
 
@@ -10,10 +10,3 @@ Deploy your own Docusaurus project with Vercel.
 
 _Live Example: https://docusaurus-2-template.vercel.app_
 
-### How We Created This Example
-
-To get started with Docusaurus on Vercel, you can use the [Docusaurus CLI](https://v2.docusaurus.io/docs/installation#scaffold-project-website) to initialize the project:
-
-```shell
-npx create-docusaurus@latest my-website classic
-```
