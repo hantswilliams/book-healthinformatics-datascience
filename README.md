@@ -10,3 +10,6 @@ Deploy your own Docusaurus documentation or ebook (based on markdown) project wi
 
 _My Live Example: https://book.datascience.appliedhealthinformatics.com/_
 
+## Setting up Algolia Doc Search:
+- General instructions: https://docusaurus.io/docs/search#using-algolia-docsearch 
+- Go here to register once it is live: https://docsearch.algolia.com/apply/ 

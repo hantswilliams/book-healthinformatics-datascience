@@ -52,39 +52,25 @@ const config = {
       }),
     ],
   ],
+
+  // Add the themes section with the search plugin
+  themes: [
+    // ... Your other themes.
+    [
+      "@easyops-cn/docusaurus-search-local",
+      ({
+        hashed: true,
+        // For Docs using Chinese, The `language` is recommended to set to:
+        // language: ["en", "zh"],
+      }),
+    ],
+  ],
+
+
+
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-
-      algolia: {
-        // The application ID provided by Algolia
-        appId: 'CCD0G15L1W',
-  
-        // Public API key: it is safe to commit it
-        apiKey: '6c4961d17ed852a0227385152aeffae0',
-  
-        indexName: 'book-data-science',
-  
-        // Optional: see doc section below
-        contextualSearch: true,
-  
-        // // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
-        // externalUrlRegex: 'external\\.com|domain\\.com',
-  
-        // // Optional: Replace parts of the item URLs from Algolia. Useful when using the same search index for multiple deployments using a different baseUrl. You can use regexp or string in the `from` param. For example: localhost:3000 vs myCompany.com/docs
-        // replaceSearchResultPathname: {
-        //   from: '/docs/', // or as RegExp: /\/docs\//
-        //   to: '/',
-        // },
-  
-        // Optional: Algolia search parameters
-        searchParameters: {},
-  
-        // Optional: path for search page that enabled by default (`false` to disable it)
-        searchPagePath: 'search',
-  
-        //... other Algolia params
-      },
 
       navbar: {
         title: 'Applied Health Informatics',
@@ -157,6 +143,11 @@ const config = {
         darkTheme: darkCodeTheme,
       },
     }),
+
+
+
+
+    
 };
 
 module.exports = config;
