@@ -4,32 +4,29 @@ import styles from './styles.module.css';
 
 const FeatureList = [
   {
-    title: 'Easy to Use',
+    title: 'Data-Driven Decisions',
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        The modern healthcare system relies heavily on data. Our course dives deep into the techniques and tools you need to transform raw health data into actionable insights.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
+    title: 'Empower with Technology',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Learn how technologies, including machine learning and NLP, can revolutionize healthcare systems. Enhance diagnostics, predict outcomes, and personalize patient care.
       </>
     ),
   },
   {
-    title: 'Powered by React',
+    title: 'Practical and Hands-on',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Every chapter in our guide comes with hands-on assignments and real-world examples. Gain practical experience while learning.
       </>
     ),
   },
