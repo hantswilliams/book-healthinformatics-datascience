@@ -37,3 +37,24 @@ Health data comes in various formats, each with its own complexities:
 ## Extracting Value from Acquired Data
 
 The process of acquiring health data is just the beginning. Extracting meaningful insights requires diligent data cleaning, integration, and transformation. Advanced analytical techniques, including machine learning and AI, play a crucial role in turning raw data into actionable insights that drive improvements in patient care, medical research, and healthcare operations.
+
+## Open Source Dataset Examples
+
+For easy access and convenience, we have compiled all the links to these healthcare datasets and resources in a [GitHub repository](https://github.com/hantswilliams/healthcare-data). You can visit the repository to explore and discover more about each dataset and resource.
+
+Feel free to explore these datasets, resources, and tools to enhance your understanding of healthcare data and develop innovative solutions in the field of health informatics.
+### Unique Open Source Datasets
+
+- [Gun Violence Archive](https://www.gunviolencearchive.org/): Analyze comprehensive data related to gun violence incidents, including location, date, victims, and more.
+- [Social Capital](https://socialcapital.org): Explore datasets related to social determinants of health, offering valuable insights into the impact of social factors on population health outcomes.
+- [NY SDoH Resources](https://journals.sagepub.com/doi/full/10.1177/00469580231152318): A curated list of resources and data specific to social determinants of health in New York.
+- [All of Us (NIH)](https://databrowser.researchallofus.org/): Gain access to diverse datasets encompassing genetics, patient-reported outcomes, environmental factors, social determinants of health, and more.
+- [MIMIC](https://physionet.org/content/mimiciii-demo/1.4/): A dataset offering ICU-like data, ideal for research and analysis in critical care settings.
+- [CMS Open Payments](https://www.cms.gov/OpenPayments/Data/Dataset-Downloads): Explore the financial relationships between healthcare providers and manufacturers in the United States.
+- [CMS Medicare Claims PUF](https://www.cms.gov/Research-Statistics-Data-and-Systems/Downloadable-Public-Use-Files/BSAPUFS): Publicly available Medicare claims data that provides insights into healthcare utilization, costs, and more.
+- [MTSamples](https://www.mtsamples.com/): A collection of text samples for natural language processing (NLP) tasks in healthcare, including medical transcription examples.
+- [Healthdata.gov DATAJAM Curated Datasets](https://healthdata.gov/stories/s/6usb-uzrp): A curated selection of datasets covering SDoH, care access, Lyme disease, COVID-19 equity, and more.
+
+Feel free to explore these datasets and leverage them for research, analysis, and building your skillset. These open source datasets will serve as valuable resources to enhance your understanding of healthcare data and develop innovative solutions in the field of health informatics. Happy exploring!
+
+*Note: It's always important to review the terms of use and data licensing agreements associated with each dataset before use.*
