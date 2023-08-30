@@ -1,9 +1,9 @@
 {
-  "label": "Chapter 1 - Notebooks and Data Acquisition",
+  "label": "Chapter 1 - Health Data Acquisition and Notebooks",
   "position": 2,
   "link": {
     "type": "generated-index",
-    "description": "Explore Jupyter Notebooks and Google Colab's transformative role in health informatics, along with insights into health data sources, ethics, and best practices."
+    "description": "Introduction to health data sources and ethics, along with Jupyter Notebooks via Google Colab"
   }
 }
 
