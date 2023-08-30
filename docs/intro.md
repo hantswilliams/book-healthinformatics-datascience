@@ -2,46 +2,33 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# Welcome 
 
-Let's discover **Docusaurus in less than 5 minutes**.
+## Healthcare Informatics & Data Science
 
-## Getting Started
+Dive deep into the transformative power of data in modern healthcare.
 
-Get started by **creating a new site**.
+## Overview
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+This guide provides a comprehensive overview of how data analytics, machine learning, and other technologies are revolutionizing healthcare systems. Whether you're a healthcare professional, data scientist, student, or enthusiast, there's something for everyone.
 
-### What you'll need
+### What you'll learn
 
-- [Node.js](https://nodejs.org/en/download/) version 16.14 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+- **Healthcare Data Wrangling**: How to preprocess and transform raw health data.
+- **Predictive Health Analytics**: Harness the power of machine learning to anticipate patient needs.
+- **Natural Language Processing**: Extract valuable insights from clinical notes and patient feedback.
+- **Automating Health Data Tasks**: Efficiently manage and automate routine health data processes.
 
-## Generate a new site
+## Dive into a Chapter
 
-Generate a new Docusaurus site using the **classic template**.
+Each chapter is meticulously crafted to provide both theoretical knowledge and hands-on experience. Every topic is supplemented with real-world examples, case studies, and assignments to ensure a holistic learning experience.
 
-The classic template will automatically be added to your project after you run the command:
+### Start with Basics
 
-```bash
-npm init docusaurus@latest my-website classic
-```
+Begin your journey with foundational concepts like data preprocessing and visualization. As you progress, you'll venture into more advanced topics, like time series analysis and natural language processing.
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
+## Engage and Contribute
 
-The command also installs all necessary dependencies you need to run Docusaurus.
+Your feedback and insights are invaluable. If you have suggestions, corrections, or topics you'd like to see added, please let us know. We believe in the power of community and collaborative learning.
 
-## Start your site
-
-Run the development server:
-
-```bash
-cd my-website
-npm run start
-```
-
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
-
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+Let's transform healthcare with data, together!
