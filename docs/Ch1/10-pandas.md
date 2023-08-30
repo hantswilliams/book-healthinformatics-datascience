@@ -226,7 +226,26 @@ data = pd.read_csv('/content/drive/My Drive/data.csv')
 
 Keep in mind that when working in remote environments, file paths need to be adjusted to match the location of the data within that environment. By understanding how file paths work and leveraging the options available in Google Colab, you can effectively load data files for analysis using pandas.
 
+#### Loading Data with Various Options
 
+Pandas provides a variety of options to customize how you load CSV files. Here are a few common arguments you might use with read_csv():
+
+- `nrows`: Load only a specific number of rows from the file.
+- `skiprows`: Skip a specified number of rows at the beginning of the file.
+- `usecols`: Specify which columns to load by providing a list of column names.
+- `dtype`: Pre-define data types for columns to optimize memory usage and prevent data type inference.
+- `skip_blank_lines`: Skip empty lines in the file.
+- `encoding`: Specify the character encoding of the file.
+
+Here's an example of using some of these options:
+
+```python
+import pandas as pd
+
+# Load the first 100 rows of specific columns with predefined data types
+data = pd.read_csv('data.csv', nrows=100, usecols=['Name', 'Age'], dtype={'Name': str, 'Age': int})
+```
+Pandas provides a flexible and efficient way to load and manipulate data from CSV files, making it an essential tool for health informatics data analysis.
 
 ### Loading Excel Files
 Excel files (.xlsx) are widely used for data storage. Pandas offers the `read_excel()` function to load Excel files:
