@@ -6,6 +6,8 @@ sidebar_position: 2
 
 Protecting patient privacy is paramount in the realm of health informatics. While patients contribute a wealth of data to the healthcare ecosystem, it's important to recognize that actual ownership of their data is often limited, particularly when it comes to data generated within Electronic Health Records (EHRs). The complex interplay between patient rights, data ownership, and the healthcare providers' roles underscores the intricate landscape of data licensing.
 
+  ![Synthea EMR - Medication Example](../../static/img/ch1/hipaa_lawyer_funny.png)
+
 - **Patient Privacy and HIPAA Compliance**: Adhering to regulations like the Health Insurance Portability and Accountability Act (HIPAA) is essential. These standards establish guidelines for the confidentiality and security of healthcare information, promoting patient trust in the digital age.
 
 - **Consent Management and Data Anonymization Techniques**: Acquiring informed consent from patients before utilizing their data is a cornerstone of ethical data usage. Anonymizing data, removing personally identifiable information, further safeguards patient privacy and confidentiality.
