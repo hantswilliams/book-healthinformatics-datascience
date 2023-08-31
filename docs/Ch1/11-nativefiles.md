@@ -2,7 +2,7 @@
 sidebar_position: 11
 ---
 
-# 1.11 Native Python File Handling in Health Data
+# 1.11 Native Python File Handling for Importing Data
 
 Native Python offers a versatile set of tools for extracting, processing, and manipulating raw health data, allowing you to address unique challenges often encountered in healthcare datasets.
 

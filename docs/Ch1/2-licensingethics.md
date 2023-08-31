@@ -53,6 +53,8 @@ Anonymizing data involves removing any information that could identify individua
 
 - **Pseudonymization**: Replacing identifiers with pseudonyms or codes, making it difficult to identify individuals without access to a key.
 
+Public clouds offer services that can automatically remove or redact PII/PHI, like  [Amazon Comprehend PII Redaction](https://docs.aws.amazon.com/comprehend/latest/dg/redact-api-pii.html) from AWS, the [Azure Ai Langauge Service](https://learn.microsoft.com/en-us/azure/ai-services/language-service/personally-identifiable-information/how-to-call) from Microsoft, or Googles [Sensitive Data Protection](https://cloud.google.com/dlp/docs/classification-redaction) redaction service.
+
 ### Case Study: De-Identification in Health Research
 
 The Minnesota Population Center (MPC) offers a case study in data anonymization and de-identification. They provide public access to large-scale survey data, such as the Integrated Public Use Microdata Series (IPUMS), while ensuring individual privacy. The MPC follows a rigorous process:

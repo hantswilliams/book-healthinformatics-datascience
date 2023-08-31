@@ -4,9 +4,9 @@ sidebar_position: 1
 
 # 1.1 Health Data Sources
 
-In the dynamic landscape of digital health, a multitude of data sources have arisen, each offering a unique lens into the realm of healthcare:
+In the dynamic landscape of health-related data, a multitude of data sources have arisen. Each offering a unique lens into the realm of healthcare from a different perspective:
 
-## Traditional Sources
+## Traditional Perspectives: 
 
 ### Electronic Health Records (EHRs) and Personal Health Records (PHRs)
 
@@ -28,12 +28,12 @@ In the below example dataset from [CMS - Synthetic Claims Data - Inpatient - Fee
 
 The emergence of '-omics' technologies, such as genomics, proteomics, and metabolomics, has unleashed a torrent of biological data. Companies like 23andMe and AncestryDNA offer direct-to-consumer genetic testing, enabling individuals to explore their ancestry, inherited traits, and potential genetic health risks. Large-scale research projects like the Human Genome Project and initiatives by the National Institutes of Health contribute to the growth of this data, fueling groundbreaking insights into our biology and diseases.
 
-In the below example dataset from data published by [Blackmore et al. (2017)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5544260/), The effect of upper-respiratory infection on transcriptomic changes in the CNS. The goal of the study was to determine the effect of an upper-respiratory infection on changes in RNA transcription occuring in the cerebellum and spinal cord post infection. Gender matched eight week old C57BL/6 mice were inoculated saline or with Influenza A by intranasal route and transcriptomic changes in the cerebellum and spinal cord tissues were evaluated by RNA-seq. 
+In the below example dataset which is a subset from data published by [Blackmore et al. (2017)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5544260/) and can be access [here on github](https://github.com/UCLouvain-CBIO/WSBIM1207/tree/master/data). This dataset "...looks at the effect of upper-respiratory infection on transcriptomic changes in the CNS. The goal of the study was to determine the effect of an upper-respiratory infection on changes in RNA transcription occuring in the cerebellum and spinal cord post infection. Gender matched eight week old C57BL/6 mice were inoculated saline or with Influenza A by intranasal route and transcriptomic changes in the cerebellum and spinal cord tissues were evaluated by RNA-seq".  
 
 ![RNA-seq data - Inpatient](../../static/img/ch1/rna_seq_data.png)
 
 
-## Non-Traditional
+## Non-Traditional Perspectives:
 
 Beyond conventional sources, novel avenues for health data are emerging. These non-traditional data sources offer additional dimensions of understanding health and well-being:
 
