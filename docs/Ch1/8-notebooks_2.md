@@ -1,10 +1,14 @@
 ---
-sidebar_position: 8
+sidebar_position: 7
 ---
 
-# 1.8 Google Colab: Cloud-Based Notebook
+# 1.7 Google Colab: The Cloud-Based Jupyter Notebook
 
-While Jupyter Notebooks provide the flexibility of running notebooks locally on your own machine, you can also leverage cloud-based solutions for a seamless and collaborative notebook experience. One such solution is Google Colab (short for Colaboratory), a free-to-use platform that provides a cloud-hosted environment for creating and running Jupyter notebooks.
+Python can be a pain in the butt to install locally on your own machine, which means jupyter notebook, which can be installed with a simple `pip install notebook` or `pip install jupyterlab` ([official documentation found here for installation](https://jupyter.org/install)) can still be difficult dispite it being a simple command to execute in your termal. As an example, depending on if you are on a Mac (M-chip or intel) or PC...there are many difficulities that can arise and error messages that would need to be addressed during the installation process. 
+
+In order to avoid these infastructure difficulties and focus on learning data science, I believe the best way forward is utilizing cloud vendors that manage the infastructure required to deploy  services like Jupyter Notebooks. This way we can get a seamless and collaborative notebook experience. 
+
+One such solution is Google Colab (short for Colaboratory), a free-to-use platform that provides a cloud-hosted environment for creating and running Jupyter notebooks.
 
 - Google Colab Overview: [Introduction to Google Colab](https://colab.research.google.com/notebooks/intro.ipynb)
 - Google Colab FAQs: [Google Colab FAQs](https://research.google.com/colaboratory/faq.html)
@@ -14,7 +18,9 @@ While Jupyter Notebooks provide the flexibility of running notebooks locally on 
 
 ## Other Notebook Options
 
-Running notebooks on your local machine requires installing Python and Jupyter, which can be facilitated by tools like Anaconda. Other platforms, such as Amazon SageMaker or IDEs like Visual Studio Code with notebook plugins, offer notebook capabilities with additional features and integrations.
+As previously stated, running notebooks on your local machine requires installing Python and Jupyter, which can be difficult, but made easier by tools like Anaconda. 
+
+Other platforms, such as Amazon SageMaker or IDEs like Visual Studio Code with notebook plugins, offer notebook capabilities with additional features and integrations.
 
 - Anaconda: [Using Anaconda for Notebooks](https://docs.anaconda.com/ae-notebooks/user-guide/basic-tasks/apps/jupyter/index.html)
 - Private JupyterHub: [Deploying JupyterHub](https://jupyter.org/hub)
@@ -24,7 +30,12 @@ Running notebooks on your local machine requires installing Python and Jupyter, 
 - Visual Studio Code Notebook Support: [Notebooks in Visual Studio Code](https://code.visualstudio.com/blogs/2021/11/08/custom-notebooks)
 
 In addition to these, their are many other companies that are emerging that allow for real-time collaboration and additional advanced functionalities with their notebooks: 
-
+  - [Deepnote](https://deepnote.com/): Explore data with Python and SQL, work together with your team, and share insights that lead to action all from the comfort of your browse
+  - [Azure Machine Learning Studio](https://ml.azure.com/): Azure Machine Learning is a cloud service for accelerating and managing the machine learning project lifecycle. Machine learning professionals, data scientists, and engineers can use it in their day-to-day workflows: Train and deploy models, and manage MLOps
+  - [GCP Vertex AI Workbench](https://cloud.google.com/vertex-ai/docs/workbench/managed/introduction): Vertex AI Workbench is a Jupyter notebook-based development environment for the entire data science workflow. You can interact with Vertex AI and other Google Cloud services from within a Vertex AI Workbench instance's Jupyter notebook.
+  - [Kaggle Kernels](https://www.kaggle.com/docs/notebooks): Kaggle provides a platform for data science competitions, and part of their platform includes Kernels. Kernels are Jupyter notebooks that you can run on their infrastructure, and they often contain solutions and analyses from various Kaggle competitions.
+  - [Cocalc](https://cocalc.com/features/jupyter-notebook): Cocalc is a cloud-based platform that supports collaborative Jupyter notebooks as well as other coding environments. It's designed for both teaching and research.
+  - [Binder](https://mybinder.org/): Binder is an open-source tool that allows you to create custom computing environments for your projects. You can specify a GitHub repository that contains Jupyter notebooks, and Binder will create a Docker image and deploy it, allowing others to interact with your notebooks.
 
 
 ## Introducing Google Colab

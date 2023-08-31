@@ -1,8 +1,8 @@
 ---
-sidebar_position: 7
+sidebar_position: 8
 ---
 
-# 1.7 Jupyter Notebooks: How They Work
+# 1.8 Jupyter Notebooks: How They Work
 
 Jupyter Notebooks have revolutionized the way data analysis and exploration are conducted. These interactive documents combine code, visualizations, and explanatory text, allowing seamless collaboration and knowledge sharing among health informaticists. Let's delve into the technical details of how Jupyter Notebooks work and why they're an essential tool in your health informatics journey.
 
@@ -42,7 +42,7 @@ Jupyter Notebooks follow a top-down execution flow. This means that you should r
 ## Importing Libraries
 In Jupyter Notebooks, you can import libraries just like you would in a regular Python script. Here's an example of importing the pandas and numpy libraries:
 
-```
+```python
 import pandas as pd
 import numpy as np
 ```

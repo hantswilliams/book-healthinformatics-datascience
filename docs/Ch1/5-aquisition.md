@@ -53,7 +53,6 @@ Feel free to explore these datasets, resources, and tools to enhance your unders
 - [CMS Open Payments](https://www.cms.gov/OpenPayments/Data/Dataset-Downloads): Explore the financial relationships between healthcare providers and manufacturers in the United States.
 - [CMS Medicare Claims PUF](https://www.cms.gov/Research-Statistics-Data-and-Systems/Downloadable-Public-Use-Files/BSAPUFS): Publicly available Medicare claims data that provides insights into healthcare utilization, costs, and more.
 - [MTSamples](https://www.mtsamples.com/): A collection of text samples for natural language processing (NLP) tasks in healthcare, including medical transcription examples.
-- [Healthdata.gov DATAJAM Curated Datasets](https://healthdata.gov/stories/s/6usb-uzrp): A curated selection of datasets covering SDoH, care access, Lyme disease, COVID-19 equity, and more.
 
 Feel free to explore these datasets and leverage them for research, analysis, and building your skillset. These open source datasets will serve as valuable resources to enhance your understanding of healthcare data and develop innovative solutions in the field of health informatics. Happy exploring!
 

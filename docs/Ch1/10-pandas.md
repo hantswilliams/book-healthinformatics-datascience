@@ -6,7 +6,7 @@ sidebar_position: 10
 
 Pandas, a powerful Python data manipulation library, is an indispensable tool for working with health data due to its versatility and ease of use. Whether you're dealing with electronic health records (EHRs), medical imaging data, clinical trial results, or any other health-related dataset, pandas provides the tools to efficiently organize, analyze, and visualize the data.
 
-One of pandas' strengths is its ability to handle a wide range of data formats commonly used in the healthcare domain. We will be discussing these formats further late. But for now:
+One of pandas' strengths is its ability to handle a wide range of data formats commonly used in the healthcare domain. We will be discussing these formats further late. But for now, here is a little preview:
 
 - **HL7 (Health Level 7)**: HL7 is a standard for exchanging healthcare information. Using pandas, you can parse and transform HL7 messages to extract meaningful information about patients, diagnoses, treatments, and more.
 
@@ -52,7 +52,7 @@ pip install pandas
 
 Please keep in mind, that if you are using Google Colab it should already be installed by default, but if you need to uninstall or install a new version, you would do the following in a new code block as an example:
 
-```
+```bash
 !pip uninstall pandas
 !pip install pandas 2.0.3
 ```
@@ -60,7 +60,7 @@ Please keep in mind, that if you are using Google Colab it should already be ins
 ## Built-in Functions and Common Usage:
 Pandas comes with hundreds of built-in functions that facilitate data manipulation, analysis, and transformation. When you import pandas, it's common to use the alias `pd` to make it easier to reference functions:
 
-```
+```python
 import pandas as pd
 ```
 
@@ -69,6 +69,14 @@ The pandas library is extensive, and it's impossible to know all its functionali
 Please spend a section now to see how the documentation is structured: 
 
 ### [STOP AND CLICK HERE: Please review the Pandas Documentation](https://pandas.pydata.org/docs/index.html) 
+
+## Official Tutorial from *pandas*
+
+Sometimes the best documentation and tutorials come from the author(s) of the package or code, while other times if can be from a blog or external 3rd party tutorial. 
+
+![pandas documentation](../../static/img/ch1/pandas_documentation_official.png)
+
+When it comes to pandas, they do an excellent job introducing new users to their key services. If you [visit here](https://pandas.pydata.org/docs/getting_started/intro_tutorials/01_table_oriented.html), you can see how the pandas team outlines some fo the key concepts with code examples of the data table representation, examples of specific actions or functions that can be applied to your data, combining various datasets, and much more 
 
 ## Loading in Data with Pandas
 
@@ -134,25 +142,32 @@ pandas.io.stata.StataReader.variable_labels
 pandas.io.stata.StataWriter.write_file
 ```
 
+## `pandas` versus `pd` ?
+When you are looking at the official documentation and code examples, you may see that those examples spell out the pandas package fully `pandas.reads_sql()` as an example. 
+
+But when we use `import pandas as pd`, we would then call the pandas functions such as `read_sql` by using `pd.read_sql` which is the equivalent to `pandas.read_sql()`. 
+
+This is a great example of how customizable the code can be and its flexibility, but how it can also lead to confusion. So if you use `import pandas as pd`, be sure to use `pd`, versus if you just use `import pandas`, then just use `pandas` when calling pandas functions related to loading in a dataset or database.  
+
 ## Common Data Reading Methods in Pandas
 
 Here are some commonly used methods in Pandas for reading different data formats, particularly relevant for health informatics:
 
-1. **`pandas.read_csv`**: This method is commonly used to read comma-separated values (CSV) files, which are popular for storing tabular data. Many health-related datasets are available in CSV format.
+1. **`pandas.read_csv`** or **`pd.read_csv`**: This method is commonly used to read comma-separated values (CSV) files, which are popular for storing tabular data. Many health-related datasets are available in CSV format.
 
-2. **`pandas.read_excel`**: Useful for reading data from Microsoft Excel files. Health data might be stored in Excel format, and this method can help you extract data from these files.
+2. **`pandas.read_excel`** or **`pd.read_excel`**: Useful for reading data from Microsoft Excel files. Health data might be stored in Excel format, and this method can help you extract data from these files.
 
-3. **`pandas.read_json`**: JSON (JavaScript Object Notation) is a common data format, especially in web-based applications. This method allows you to read JSON data into a Pandas DataFrame.
+3. **`pandas.read_json`** or **`pd.read_json`**: JSON (JavaScript Object Notation) is a common data format, especially in web-based applications. This method allows you to read JSON data into a Pandas DataFrame.
 
-4. **`pandas.read_sql`**: When you're working with databases, this method enables you to execute SQL queries and fetch results directly into a DataFrame. Health informatics often involves querying databases for patient data.
+4. **`pandas.read_sql`** or **`pd.read_sql`**: When you're working with databases, this method enables you to execute SQL queries and fetch results directly into a DataFrame. Health informatics often involves querying databases for patient data.
 
-5. **`pandas.read_hdf`**: Hierarchical Data Format (HDF) is used for large and complex datasets. This method lets you read HDF files, which might contain extensive healthcare data.
+5. **`pandas.read_hdf`** or **`pd.read_hdf`**: Hierarchical Data Format (HDF) is used for large and complex datasets. This method lets you read HDF files, which might contain extensive healthcare data.
 
-6. **`pandas.read_parquet`**: Parquet is a columnar storage format optimized for analytics. It's used for large-scale data processing, and health data analysis can benefit from its efficiency.
+6. **`pandas.read_parquet`** or **`pd.read_parquet`**: Parquet is a columnar storage format optimized for analytics. It's used for large-scale data processing, and health data analysis can benefit from its efficiency.
 
-7. **`pandas.read_feather`**: Feather is another columnar storage format designed for speed and efficiency. It's often used for exchanging data between different programming languages.
+7. **`pandas.read_feather`** or **`pd.read_feather`**: Feather is another columnar storage format designed for speed and efficiency. It's often used for exchanging data between different programming languages.
 
-8. **`pandas.read_pickle`**: Pickle is a Python-specific serialization format. While generally not recommended for sharing data between different systems, it's sometimes useful for saving and loading Python objects.
+8. **`pandas.read_pickle`** or **`pd.read_pickle`**: Pickle is a Python-specific serialization format. While generally not recommended for sharing data between different systems, it's sometimes useful for saving and loading Python objects.
 
 These methods offer a glimpse into the diverse range of data formats you might encounter in health informatics. Being familiar with these methods allows you to efficiently load and work with data from various sources.
 
