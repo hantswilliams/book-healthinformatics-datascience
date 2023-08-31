@@ -3,6 +3,8 @@ sidebar_position: 12
 ---
 
 # Resources for Further Exploration
+
+## Reading and Tutorials
 - Explore [Jupyter](https://jupyter.org/)
 - Dive into [Google Colab](https://colab.research.google.com/)
 - Spend time with the official [Pandas Documentation](https://pandas.pydata.org/pandas-docs/stable/)
