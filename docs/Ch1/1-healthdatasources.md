@@ -8,11 +8,13 @@ In the dynamic landscape of health-related data, a multitude of data sources hav
 
 ## Traditional Perspectives: 
 
-### Electronic Health Records (EHRs) and Personal Health Records (PHRs)
+### Electronic Medical Records (EMRs), Electronic Health Records (EHRs) and Personal Health Records (PHRs)
 
-These digital counterparts to traditional paper records are the backbone of modern healthcare. EHRs capture comprehensive patient health histories, treatment plans, and diagnoses within clinical settings, while PHRs empower individuals to manage their health data, facilitating informed decision-making and collaborative care. Prominent players in this domain include companies like Epic Systems, Cerner Corporation, and Allscripts.
+Electronic Medical Records (EMRs), Electronic Health Records (EHRs), and Personal Health Records (PHRs) are integral components of the digital transformation of healthcare information management. EMRs are digital versions of paper charts used in medical practices, containing patient medical and treatment histories. EHRs go beyond EMRs by not only storing patient information but also allowing seamless sharing of data across different healthcare organizations. EHRs support clinical workflows and decision-making, promoting coordinated patient care. On the other hand, PHRs are patient-centric health repositories managed by individuals themselves. They enable patients to store their medical histories, medications, allergies, and other health-related information, promoting patient engagement and self-care.
 
-In the below example dataset, which is a synthetic set of EMR-like data of what should be expected to be producted from a medications section. This was produced via [Synthea](https://synthetichealth.github.io/synthea/). We would expect to see columns (features) rleated to when the medicaiton was started (`start`) and stopped (`stop`), a unique patient identifier (`patient`), the patients insurance provider (`payer`), associated encounter (`encounter`), and associated NDC (national drug code) (`code`) and medication descriptions (`description`). We would likely also see many other related fields. 
+Prominent players in the healthcare information management sector include companies like Epic Systems, Cerner Corporation, and Allscripts, which provide software solutions and platforms for EMRs and EHRs. The utilization of these digital records is transforming healthcare by enhancing communication, improving patient outcomes, and streamlining administrative processes.
+
+In the below example dataset, which is a synthetic set of EMR-like data of what should be expected to be producted from a medications section. This was produced via [Synthea](https://synthetichealth.github.io/synthea/). We would expect to see columns (features) rleated to when the medicaiton was started and stopped, a unique patient identifier, the patients insurance provider, associated encounter, and associated NDC (national drug code) and medication descriptions. We would likely also see many other related fields. 
 
 ![Synthea EMR - Medication Example](../../static/img/ch1/synthea_emr_medications.png)
 

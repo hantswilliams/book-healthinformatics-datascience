@@ -2,13 +2,12 @@
 sidebar_position: 3
 ---
 
-# 2.3 Distributed Computation with Dask, Ray, and Modin in Health Informatics
+# 2.3 Distributed Computation with Dask, Ray, and Modin for Big Data
 
 ## Intro 
 
-As previously discussed, POLARS is the next step up in the chain for dealing with big data, but still all on your own location machine.
+For truly big health informatics datasets reaching into the billions of records, distributed computing frameworks like Dask, Ray, and Modin become essential. These tools leverage clusters of machines to break down data processing tasks into smaller units that can be executed in parallel. By distributing the workload across multiple nodes, these frameworks overcome memory limitations and enable efficient handling of vast datasets, ensuring high-performance data analysis and processing.
 
-Once you have a dataset that potentially exceeds the size of your own machine, its now time to look at other solutions that can handle distributed computing. 
 
 For those gargantuan health datasets, Dask, Ray, and Modin come to the rescue:
 - **Scaling Pandas**: These libraries enhance Pandas' capabilities, allowing it to handle large-scale health data smoothly.

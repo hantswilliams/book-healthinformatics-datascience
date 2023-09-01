@@ -2,7 +2,9 @@
 sidebar_position: 2
 ---
 
-# 2.2 Polars in Health Data Analysis
+# 2.2 Polars for Large Data 
+
+In this chapter we discuss Polars, which comes into play when dealing with large health informatics datasets that can span tens of millions to a few hundred million records. Its advanced parallel processing capabilities optimized for a single machine, combined with a columnar storage format, enable efficient operations on datasets that surpass traditional Pandas' capabilities. Polars makes the most of modern CPUs and memory architectures to provide seamless data processing and analysis within a single machine's memory.
 
 As health datasets grow, Polars emerges as a strong contender to Pandas:
 - **Features and Advantages**: Polars shines with large datasets, making it a fit choice for extensive health datasets.
