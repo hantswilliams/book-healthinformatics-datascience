@@ -14,7 +14,7 @@ Polars is a Python library for data analysis that is similar to Pandas. However,
 
 Polars is a great package to explore if your data is not soo large that it doesn't fit on your computer. Polars will take better advantage of your CPU/RAM with its data model, and supports multi-threated operations out of the box. 
 
-But if your dataset is soo big that it can fit, or just barely fits on your personal computer, its time to move on to other solutions described in the [next section](/docs/Ch2/dask.md) like `ray` or `dask` which can be deployed across a cluster of machines. Polars does have the capability to perform distributed computation across many machines, with software like [fugue](https://fugue-tutorials.readthedocs.io/index.html), which may raise in popularity in the future.   
+But if your dataset is soo big that it can fit, or just barely fits on your personal computer, its time to move on to other solutions described in the [next section](/docs/Ch2/distributed-computation.md) like `ray` or `dask` which can be deployed across a cluster of machines. Polars does have the capability to perform distributed computation across many machines, with software like [fugue](https://fugue-tutorials.readthedocs.io/index.html), which may raise in popularity in the future.   
 
 ### Similarities to pandas
 
