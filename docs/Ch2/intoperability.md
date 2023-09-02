@@ -18,11 +18,15 @@ Recognizing the need for seamless data exchange, various initiatives emerged to 
 
 In the following sections, we will explore how Python and its libraries have played a pivotal role in addressing these interoperability challenges. By leveraging Python's capabilities, health informatics professionals can bridge data format gaps, integrate diverse data sources, and work towards a more connected and efficient healthcare system.
 
-## Who cares about interoperability and its future? TEFCA 
+## Who cares about interoperability and its future? TEFCA and HIEs 
 
-TEFCA, which stands for Trusted Exchange Framework and Common Agreement, is an initiative by the Office of the National Coordinator for Health Information Technology (ONC) in the United States. Its goal is to establish a common framework for health information exchange, enabling secure and interoperable sharing of health information across different health information networks.
+TEFCA, which stands for Trusted Exchange Framework and Common Agreement, is an initiative by the Office of the National Coordinator for Health Information Technology (ONC) in the United States. Its goal is to establish a common framework for health information exchange, enabling secure and interoperable sharing of health information across different health information networks, or health information exchanges (HIEs).
 
-The TEFCA initiative aims to overcome the challenges related to data fragmentation, lack of standardized exchange methods, and varying levels of trust among healthcare organizations. TEFCA outlines a set of principles, policies, technical requirements, and legal frameworks that health information networks should follow to ensure seamless and secure data exchange.
+HIEs have emerged as a pivotal solution in modern healthcare, addressing the challenge of seamlessly sharing electronic health information across disparate systems, facilities, and organizations. An HIE serves as a centralized platform that facilitates the secure exchange of patient health records, clinical data, test results, and other critical medical information among healthcare providers, hospitals, clinics, and even patients themselves. 
+
+The overarching goal of HIEs is to improve patient care, enhance coordination among healthcare providers, and enable data-driven decision-making while maintaining patient privacy and security. Through standardized protocols, secure communication channels, and interoperable data formats, HIEs bridge the gap between various healthcare entities, making it possible to access comprehensive patient information in real-time, regardless of the originating source. As healthcare systems become more digitized and interconnected, the role of HIEs becomes increasingly vital in achieving efficient, data-driven, and patient-centric care delivery.
+
+The TEFCA initiative aims to overcome the challenges related to data fragmentation that have emerged between different HIEs, lack of standardized exchange methods, and varying levels of trust among healthcare organizations. TEFCA outlines a set of principles, policies, technical requirements, and legal frameworks that health information networks should follow to ensure seamless and secure data exchange.
 
 Key aspects of TEFCA include:
 
@@ -36,7 +40,7 @@ Key aspects of TEFCA include:
 
 5. **Data Use and Consent:** TEFCA promotes patient engagement and control over their health data by defining requirements for obtaining patient consent and managing data use permissions.
 
-TEFCA's role in overseeing health exchanges is to create a unified ecosystem where health data can flow securely and efficiently across different health information networks. While TEFCA is still evolving, its framework aims to address the challenges of health data interoperability, improve patient care coordination, and facilitate research and public health efforts. As TEFCA continues to develop, it will likely play a significant role in shaping the future of health information exchange in the United States.
+TEFCA's role in overseeing HIEs is to create a unified ecosystem where health data can flow securely and efficiently across different health information networks. While TEFCA is still evolving, its framework aims to address the challenges of health data interoperability, improve patient care coordination, and facilitate research and public health efforts. As TEFCA continues to develop, it will likely play a significant role in shaping the future of health information exchange in the United States.
 
 ## Health Level Seven (HL7) and Fast Healthcare Interoperability Resources (FHIR): A Brief Overview
 
@@ -88,7 +92,41 @@ The general format of an HL7 message includes the following components:
 
 6. ***Escape Sequences:*** HL7 messages may also include escape sequences to handle special characters within fields, ensuring that they are treated as text and not as delimiters.
 
-*Here's an example of how a general HL7 message might look:*
+### Types of HL7 Messages
+
+HL7 messages are categorized into various types, each serving a specific purpose in healthcare data exchange. Here are some common types of HL7 messages:
+
+#### ADT (Admit, Discharge, Transfer)
+
+The ADT message type is used to convey patient demographic and admission-related information. It includes details about patient admissions, discharges, and transfers between different healthcare facilities. ADT messages are crucial for maintaining accurate patient records and tracking their movements within the healthcare system.
+
+#### ORM (Order Message)
+
+ORM messages are used for ordering medical services, such as tests, procedures, and medications. These messages facilitate communication between various departments within a healthcare facility, ensuring that patient orders are accurately transmitted and executed.
+
+#### ORU (Observation Result)
+
+ORU messages convey the results of medical observations, tests, and procedures. They include information about laboratory results, radiology reports, and other diagnostic findings. ORU messages play a vital role in communicating clinical data to healthcare providers for decision-making.
+
+#### SIU (Scheduling Information Unsolicited)
+
+SIU messages are used to communicate scheduling and appointment information. They inform healthcare providers and facilities about upcoming patient appointments, changes in scheduling, and other scheduling-related updates.
+
+#### MDM (Medical Document Management)
+
+MDM messages handle the exchange of medical documents, such as medical reports, images, and other clinical documents. These messages ensure that healthcare providers have access to accurate and up-to-date patient documents.
+
+#### ACK (Acknowledgment)
+
+ACK messages are used to acknowledge the receipt and processing of other HL7 messages. They provide confirmation that a message was successfully received and processed, helping to ensure the integrity of data exchange.
+
+#### DFT (Detail Financial Transactions)
+
+DFT messages handle financial transactions related to healthcare services. They include information about charges, payments, and billing for medical services rendered.
+
+These are just a few examples of the many types of HL7 messages used in healthcare data exchange. Each message type serves a specific purpose and contributes to the seamless communication of healthcare information among different systems and entities.
+
+*So here's an example of how a general HL7 message might look:*
 
 ```plaintext
 MSH|^~\&|SendingApp|SendingFac|ReceivingApp|ReceivingFac|20230830140012||ADT^A01|123456|P|2.5
@@ -98,6 +136,56 @@ PID|1||123456|Doe^John^C||19800101|M|||123 Main St.^Apt 4B^New York^NY^10001||55
 In this example, the MSH segment sets the message header, and the PID segment provides patient identification information. The segments and fields are delimited by the pipe character `(|)`, and the repetition separator `(~)` and component separator `(^)` are used for subfields.
 
 The general format and conventions of HL7 messages allow for structured data exchange between different healthcare systems, making it a widely used standard for health data interoperability.
+
+### Communication Flow and Standard Acknowledgments in HL7
+
+HL7 (Health Level 7) messages follow a specific communication flow and utilize standard acknowledgments to ensure accurate and reliable data exchange between systems. The communication flow involves the use of control characters and the Minimal Lower Level Protocol (MLLP) to encapsulate and transmit HL7 messages over TCP/IP connections.
+
+Communication control characters are essential for maintaining message integrity during transmission. The communication flow includes the following key steps:
+
+1. **Start of Block (SOB)**: A single vertical tab character (Hex 0x0B) is used to indicate the beginning of a block at the start of the message.
+
+2. **Message Content**: The HL7 message content, consisting of segments, fields, and data, follows after the SOB character.
+
+3. **Segment Termination**: Each segment within the HL7 message is terminated by the carriage return character (Hex 0x0D).
+
+4. **End of Block and Termination**: The end of the block is indicated by the Hex 0x1C character (FS), followed by the carriage return character (Hex 0x0D) at the end of the message.
+
+#### Standard Acknowledgments
+
+HL7 messages are designed to include standard acknowledgments (ACK) to ensure the receipt and processing of messages by receiving applications. Acknowledgments play a crucial role in maintaining data integrity and continuity:
+
+- **MSH Segment**: The MSH (Message Header) segment contains information about the sending and receiving applications, including the Message Control ID that uniquely identifies each HL7 message.
+
+- **MSA Segment**: The MSA (Message Acknowledgment) segment indicates whether the message was accepted or rejected. It includes an acknowledgment status code that indicates the outcome of message processing. Common acknowledgment statuses include:
+  - AA (Positive Acknowledgment): The message was successfully processed.
+  - AE (Application Error): There is a processing problem that needs to be corrected before resending.
+  - AR (Application Reject): There is an issue with the message structure or receiving application.
+
+Let’s say an inbound HL7 ADT (Admit, Discharge, Transfer) message came in with the following MSH (message header).
+
+```text
+MSH|^~\&|EPICADT|DH|LABADT|DH|201301011226||ADT^A01|HL7MSG00001|P|2.3|
+```
+If the message was accepted and acknowledged, then the response ACK message (following original mode) will look like this:
+
+```text
+MSH|^~\&|LABADT|DH|EPICADT|DH|201301011228||ACK^A01^ACK |HL7ACK00001|P|2.3
+MSA|AA|HL7MSG00001
+```
+
+Note the following:
+
+1. The source and destination systems have been switched;
+2. MSA segment contains the “AA” value which indicates acceptance; and
+3. MSA segment also contains the ID of the original message.
+
+#### Importance of Acknowledgments
+
+Acknowledgments are essential for maintaining the reliability of HL7 data exchange. Sending applications rely on ACK messages to determine the success or failure of message processing. This information helps manage the communication flow and ensures that data is not lost in transmission.
+
+By adhering to the communication flow and using standard acknowledgments, HL7 messages can be reliably transmitted, received, and processed across different healthcare systems and entities.
+
 
 ### Python Examples
 
@@ -198,12 +286,23 @@ for obx_segment in obx_segments:
 
 This complex HL7 message demonstrates how various segments come together to convey comprehensive patient data and lab results. Using Python and the appropriate HL7 package, you can parse, manipulate, and extract meaningful information from such messages to facilitate efficient healthcare data interoperability.
 
+### Additional HL7 Message Examples 
+
+1. HL7 - Official Confluence Page: 
+    - Link: [HL7 Confluence](https://confluence.hl7.org/display/OO/v2+Sample+Messages)
+    - This page is unique because it shows raw HL7 messages, as well as mappings to convert said messages to FHIR
+
+2. Sample HL7 Messages from STCHOME
+    - Link: [PHC Hub](https://documentation.stchome.com/assets/prodfiles/PHC-Hub/Jul2018/html/SampleHL7Msgs.htm)
+
+3. Sample HL7 Messages from WebChart
+    - Link: [Webchart Docs](https://docs.webchartnow.com/functions/system-administration/interfaces/sample-hl7-messages/)
 
 ## FHIR and Python
 
 Python offers a variety of tools and libraries for working with FHIR (Fast Healthcare Interoperability Resources) data, which has gained traction as a modern standard for healthcare data exchange. 
 
-### Strucutre
+### Structure
 
 FHIR (Fast Healthcare Interoperability Resources) follows a structured format designed to facilitate the exchange of healthcare information between different systems. FHIR resources are the building blocks of the standard, representing individual pieces of healthcare data. Each resource is defined by a set of attributes, and these resources can be interconnected to represent more complex healthcare concepts. Here's a general overview of the structure and formatting of FHIR:
 
@@ -323,8 +422,47 @@ print("Birth Date:", patient.birthDate)
 
 In this example, we create a **`Patient`** instance using the `fhir.resources` package and populate it with relevant information. We then access and print various attributes of the Patient resource. This demonstrates how you can use the `fhir.resources` package to work with FHIR resources in a Pythonic manner.
 
+### Additional FHIR examples from fhir.org
 
+1. ***Observation - Glucose Level***
+  - FHIR Link: [Observation Example - Glucose](https://build.fhir.org/observation-example-f001-glucose.html)
+  - This example demonstrates how to represent an observation of a patient's glucose level. It includes information such as the code for glucose, the measurement value, reference ranges, and the time of the observation.
 
+2. ***Medication***
+  - FHIR Link: [Medication Example](https://build.fhir.org/medicationexample0310.html)
+  - This example showcases how to represent a medication using FHIR. It includes details about the medication, its dosage form, and ingredients.
+
+3. ***Condition - Sepsis***
+  - FHIR Link: [Condition Example - Sepsis](https://build.fhir.org/condition-example-f203-sepsis.html)
+  - This example illustrates how to represent a patient's condition using FHIR. It includes information about the condition, its clinical status, onset date, and supporting evidence.
+
+These examples serve as official resource examples for understanding how FHIR resources are structured, what attributes are included, and how different healthcare concepts are represented using standardized formats. By studying these examples, developers and data scientists can gain insights into how to create FHIR-compliant data and integrate it into their applications or systems.
+
+### Other FHIR data examples: 
+
+- [Smart On FHIR](https://github.com/smart-on-fhir/generated-sample-data)
+
+### FHIR-Compatible Databases and Tools
+
+1. **FHIRBase**
+   - Link: [FHIRBase](https://fhirbase.aidbox.app/)
+   - Description: FHIRBase is a database solution specifically designed for FHIR data. It stores FHIR resources natively and provides SQL-like query capabilities for FHIR data retrieval and manipulation.
+
+2. **Microsoft FHIR Server**
+   - Link: [Microsoft FHIR Server](https://github.com/microsoft/fhir-server)
+   - Description: The Microsoft FHIR Server is an open-source project that offers a robust FHIR server implementation. It's designed to support FHIR data storage, retrieval, and exchange, and it can be easily deployed in various environments.
+
+3. **Linux for Health FHIR Module**
+   - Link: [Linux for Health FHIR Module](https://github.com/LinuxForHealth/FHIR)
+   - Description: The Linux for Health FHIR module is part of the Linux for Health project. It enables the integration of FHIR capabilities into the Linux for Health ecosystem, allowing interoperability with FHIR data.
+
+### Tools for FHIR Data Extraction
+
+1. **Bulk Data Server**
+   - Link: [Bulk Data Server](https://github.com/smart-on-fhir/bulk-data-server)
+   - Description: The Bulk Data Server is an open-source project by SMART Health IT that facilitates the bulk export of FHIR data. It supports the standardized FHIR Bulk Data API for retrieving large volumes of data efficiently.
+
+These FHIR-compatible databases and tools provide valuable resources for managing and interacting with FHIR data. They allow healthcare organizations and developers to store, query, and exchange FHIR resources in a standardized and efficient manner. Additionally, tools like the Bulk Data Server streamline the process of extracting data from FHIR databases, making it easier to work with large datasets.
 
 
 

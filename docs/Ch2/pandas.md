@@ -30,6 +30,9 @@ Understanding the consistency of representations across rows is critical. For he
 
 Consider a dataset containing patient medical records. Each row may represent a patient visit to a hospital. The unique identifier might be the Visit ID. By confirming the uniqueness of each visit and verifying that patients, medical procedures, and diagnoses are consistently represented, you establish a solid foundation for meaningful analyses. 
 
+**Atomic Data:**
+In the pursuit of understanding data quality and consistency, it's crucial to focus on the concept of "atomic data." Atomic data refers to the smallest, indivisible unit of data that retains its context and meaning. By identifying the atomic level of data within a dataset, you can ensure that each piece of information is consistent, accurate, and reliable. For example, in a patient dataset, the atomic data could include a patient's name, date of birth, and MRN. Recognizing atomic data aids in data standardization, quality assessment, and meaningful interpretation.
+
 Consider a dataframe called `patients_table`, where each row is a unique patient, and the columns represent different sociodemographic attributes associated with that patient. While in a `medicaitons_table`, each row is not a unique patient, but a unique combination of patient (identified by column `MRN`) + medication (identified by column `NDC`), so the same patient may be represented across many different rows within the dataframe. The same could also be true for a `encounters` table or dataframe, where it is the combination of a unique ID for patient, and a unique encounter ID, that makes a row 'unique'. 
 
 In order to understand this, we can preview the data to get an understanding. 
