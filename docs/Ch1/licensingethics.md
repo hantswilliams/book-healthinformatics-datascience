@@ -65,7 +65,7 @@ The Minnesota Population Center (MPC) offers a case study in data anonymization 
 
 - **Statistical Disclosure Control**: Applying statistical methods to ensure that even indirect identifiers are not disclosed inadvertently.
 
-- **Data Use Agreements**: Researchers accessing the data sign agreements that outline how the data will be used and the importance of preserving privacy. For more information on DUAs, please visit the [resources](12-resources.md) section.
+- **Data Use Agreements**: Researchers accessing the data sign agreements that outline how the data will be used and the importance of preserving privacy. For more information on DUAs, please visit the [resources](../../docs/Ch1//resources.md) section.
 
 - **Monitoring**: The MPC continuously monitors data use to prevent re-identification.
 
