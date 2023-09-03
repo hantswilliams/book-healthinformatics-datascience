@@ -91,9 +91,74 @@ The range is the difference between the maximum and minimum values in a dataset.
 
 ### Python Examples
 
-Start by loading your health data into a Pandas DataFrame, which provides a versatile structure for handling and analyzing data. Once your data is organized, you can apply a range of statistical functions to explore its key attributes. 
+Start by loading your health data into a Pandas DataFrame (df). Once your data is organized, you can apply a range of statistical functions to explore its key attributes. Pandas provides convenient methods to compute some of these statistics automatically. For example, you can use the `.describe()` function to generate a summary of key statistics for each column in the DataFrame.
 
-Pandas provides convenient methods to compute some of these statistics automatically. For example, you can use the `.describe()` function to generate a summary of key statistics for each column in the DataFrame:
+
+Lets first create a fake df that contains some patient records:
+
+```python
+import pandas as pd
+from faker import Faker
+import random
+from tabulate import tabulate
+
+fake = Faker()
+
+# Generate fake health data for 1000 patients
+num_patients = 1000
+data = {
+    "Patient_ID": [fake.random_int(min=1000, max=9999) for _ in range(num_patients)],
+    "Age": [random.randint(18, 90) for _ in range(num_patients)],
+    "Gender": [fake.random_element(elements=("Male", "Female")) for _ in range(num_patients)],
+    "BMI": [round(random.uniform(15, 40), 2) for _ in range(num_patients)],
+    "Blood_Pressure": [f"{random.randint(90, 160)}/{random.randint(60, 100)}" for _ in range(num_patients)],
+    "Cholesterol": [random.randint(150, 300) for _ in range(num_patients)],
+    "Glucose": [random.randint(70, 200) for _ in range(num_patients)],
+    "Smoker": [fake.random_element(elements=("Yes", "No")) for _ in range(num_patients)],
+    "Exercise": [fake.random_element(elements=("High", "Moderate", "Low")) for _ in range(num_patients)],
+    "Medication": [fake.random_element(elements=("Yes", "No")) for _ in range(num_patients)]
+}
+
+df = pd.DataFrame(data)
+
+# Split "Blood_Pressure" column into "Systolic" and "Diastolic" columns
+df[["Systolic", "Diastolic"]] = df["Blood_Pressure"].str.split("/", expand=True)
+
+# Convert "Systolic" and "Diastolic" columns to numeric
+df[["Systolic", "Diastolic"]] = df[["Systolic", "Diastolic"]].apply(pd.to_numeric)
+
+# Create a "Total_BP" column that sums "Systolic" and "Diastolic" values
+df["Total_BP"] = df["Systolic"] + df["Diastolic"]
+
+## print df
+print(tabulate(df.head(10), headers='keys', tablefmt='psql'))
+
+
+df.to_csv("health_data.csv")
+```
+
+Expected table structure:
+
+```psql
+
++----+--------------+-------+----------+-------+------------------+---------------+-----------+----------+------------+--------------+------------+-------------+------------+
+|    |   Patient_ID |   Age | Gender   |   BMI | Blood_Pressure   |   Cholesterol |   Glucose | Smoker   | Exercise   | Medication   |   Systolic |   Diastolic |   Total_BP |
+|----+--------------+-------+----------+-------+------------------+---------------+-----------+----------+------------+--------------+------------+-------------+------------|
+|  0 |         5796 |    41 | Male     | 30.83 | 103/68           |           227 |       167 | Yes      | High       | Yes          |        103 |          68 |        171 |
+|  1 |         6310 |    64 | Female   | 38.59 | 103/93           |           186 |       184 | Yes      | High       | Yes          |        103 |          93 |        196 |
+|  2 |         2233 |    67 | Female   | 17.56 | 147/95           |           158 |       111 | No       | Low        | Yes          |        147 |          95 |        242 |
+|  3 |         2200 |    58 | Female   | 24.54 | 131/78           |           169 |       153 | No       | Moderate   | No           |        131 |          78 |        209 |
+|  4 |         9327 |    67 | Female   | 33.66 | 112/90           |           172 |       142 | Yes      | Moderate   | No           |        112 |          90 |        202 |
+|  5 |         3648 |    43 | Female   | 33.13 | 90/71            |           262 |       149 | Yes      | High       | Yes          |         90 |          71 |        161 |
+|  6 |         8946 |    64 | Male     | 37.42 | 92/97            |           158 |        96 | No       | High       | Yes          |         92 |          97 |        189 |
+|  7 |         7754 |    80 | Male     | 35.37 | 128/80           |           184 |       182 | Yes      | High       | Yes          |        128 |          80 |        208 |
+|  8 |         7097 |    37 | Female   | 35.97 | 133/89           |           231 |       112 | Yes      | Moderate   | No           |        133 |          89 |        222 |
+|  9 |         4895 |    45 | Female   | 20.61 | 122/87           |           249 |       104 | No       | Low        | Yes          |        122 |          87 |        209 |
++----+--------------+-------+----------+-------+------------------+---------------+-----------+----------+------------+--------------+------------+-------------+------------+
+
+```
+
+Great, now lets see how the `.describe()` works: 
 
 ```python
 import pandas as pd
@@ -103,13 +168,37 @@ data_description = data.describe()
 print(data_description)
 ```
 
+*Data description output example:*
+
+```yaml
+        Unnamed: 0   Patient_ID          Age         BMI  Cholesterol  \
+count  1000.000000  1000.000000  1000.000000  1000.00000  1000.000000   
+mean    499.500000  5574.086000    55.100000    27.82143   222.766000   
+std     288.819436  2596.754523    20.893984     7.25352    44.414862   
+min       0.000000  1002.000000    18.000000    15.01000   150.000000   
+25%     249.750000  3446.500000    38.000000    21.24750   184.000000   
+50%     499.500000  5659.000000    56.000000    28.24000   217.500000   
+75%     749.250000  7760.500000    73.000000    34.07750   263.000000   
+max     999.000000  9994.000000    90.000000    39.99000   300.000000   
+
+           Glucose    Systolic    Diastolic    Total_BP  
+count  1000.000000  1000.00000  1000.000000  1000.00000  
+mean    135.710000   124.08400    79.976000   204.06000  
+std      37.394174    20.52438    11.697874    23.36181  
+min      70.000000    90.00000    60.000000   151.00000  
+25%     104.000000   107.00000    70.000000   187.00000  
+50%     136.000000   123.00000    80.000000   203.00000  
+75%     167.000000   142.00000    90.000000   221.00000  
+max     200.000000   160.00000   100.000000   259.00000 
+```
+
 Additionally, the .value_counts() function is useful for understanding the frequency distribution of categorical variables. It displays the count of unique values in a column:
 
 ```python
 import pandas as pd
 
 data = pd.read_csv('health_data.csv')
-gender_counts = data['gender'].value_counts()
+gender_counts = data['Gender'].value_counts()
 print(gender_counts)
 ```
 
@@ -125,36 +214,36 @@ import numpy as np
 data = pd.read_csv('health_data.csv')
 
 # Calculate mean, median, and mode of a health metric
-mean_value = data['heart_rate'].mean()
-median_value = data['blood_pressure'].median()
-mode_value = data['temperature'].mode().iloc[0]
+mean_value_bp = data['Total_BP'].mean()
+median_value_chol = data['Cholesterol'].median()
+mode_value_glucose = data['Glucose'].mode().iloc[0]
 
-# Calculate variance and standard deviation
-variance = np.var(data['glucose_level'])
-std_deviation = np.std(data['weight'])
+# Calculate variance and standard deviation for BP
+variance_bp = np.var(data['Total_BP'])
+std_deviation_bp = np.std(data['Total_BP'])
 
-# Calculate percentiles
-percentile_25 = np.percentile(data['height'], 25)
-percentile_75 = np.percentile(data['height'], 75)
+# Calculate percentiles for Glucose
+percentile_25_glucose = np.percentile(data['Glucose'], 25)
+percentile_75_glucose = np.percentile(data['Glucose'], 75)
 
-# Calculate range
-data_range = data['age'].max() - data['age'].min()
+# Calculate range for Age
+data_range_age = data['Age'].max() - data['Age'].min()
 
 # Calculate correlation and covariance
-correlation_matrix = data[['weight', 'height', 'blood_pressure']].corr()
-covariance_matrix = data[['heart_rate', 'glucose_level', 'temperature']].cov()
+correlation_matrix_1 = data[['BMI', 'Total_BP', 'Cholesterol']].corr()
+covariance_matrix_2 = data[['Glucose', 'Age', 'Total_BP']].cov()
 
 # Print results
-print("Mean Heart Rate:", mean_value)
-print("Median Blood Pressure:", median_value)
-print("Mode Temperature:", mode_value)
-print("Variance Glucose Level:", variance)
-print("Standard Deviation Weight:", std_deviation)
-print("25th Percentile Height:", percentile_25)
-print("75th Percentile Height:", percentile_75)
-print("Data Range (Age):", data_range)
-print("Correlation Matrix:\n", correlation_matrix)
-print("Covariance Matrix:\n", covariance_matrix)
+print("Mean Blood Pressure:", mean_value_bp)
+print("Median Cholesterol:", median_value_chol)
+print("Mode Glucose:", mode_value_glucose)
+print("Variance Glucose Blood Pressure:", variance_bp)
+print("Standard Deviation Blood Pressure:", std_deviation_bp)
+print("25th Percentile Glucose:", percentile_25_glucose)
+print("75th Percentile Glucose:", percentile_75_glucose)
+print("Data Range (Age):", data_range_age)
+print("Correlation Matrix 1:\n", correlation_matrix_1)
+print("Covariance Matrix 2:\n", covariance_matrix_2)
 ```
   
 ## Distribution Curves
@@ -189,6 +278,8 @@ plt.legend()
 plt.grid(True)
 plt.show()
 ```
+
+![Normal Distribution Curve](../../static/img/ch3/normal_distribution.png)
 
 In this example, we generate 1000 fake data points with a mean of 60 and a standard deviation of 10. We then create a histogram to visualize the frequency distribution of the data and overlay a PDF curve to show the theoretical normal distribution. The `density=True` argument in the `plt.hist()` function ensures that the histogram is normalized to represent a probability distribution.
 
@@ -228,6 +319,8 @@ Some common distribution shapes in healthcare data include:
 
 - **Skewed Distribution**: A skewed distribution occurs when the data is asymmetric. Positively skewed data (skewed to the right) has a tail on the right side, indicating a larger number of lower values and fewer high values. Conversely, negatively skewed data (skewed to the left) has a tail on the left side, with more high values and fewer low values. Skewed distributions can arise from factors such as outliers or limitations in measurement precision.
 
+![Right Skewed Distribution](../../static/img/ch3/distribution_right_skewed.png)
+
 Let's generate a right-skewed distribution:
 
 ```python
@@ -251,6 +344,8 @@ plt.show()
 
 A bimodal distribution has two distinct peaks. Let's generate a bimodal distribution:
 
+![Bimodal Distribution Example](../../static/img/ch3/distribution_bimodal.png)
+
 ```python
 # Generate fake data with a bimodal distribution
 bimodal_data = np.concatenate([np.random.normal(loc=30, scale=5, size=500),
@@ -266,6 +361,8 @@ plt.show()
 ```
 
 - **Uniform Distribution**: A uniform distribution signifies that values are spread evenly across the range, indicating no dominant trend or pattern. In healthcare, this might be seen in situations where health metrics are evenly distributed among patients.
+
+![Uniform Distribution](../../static/img/ch3/distribution_uniform.png)
 
 Let's generate a uniform distribution:
 
@@ -290,18 +387,21 @@ Python provides powerful libraries and tools for analyzing and visualizing distr
 
 **Matplotlib and Seaborn**: Matplotlib and Seaborn are popular data visualization libraries in Python. You can create histograms, density plots, box plots, and violin plots to visualize the distribution of health metrics. These plots help you quickly identify the shape of the data and the presence of outliers.
 
+Below, lets use are same dataset from above:
 
 ```python
 import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Create a histogram
-sns.histplot(data['age'], bins=20, kde=True)
+sns.histplot(data['Age'], bins=20, kde=True)
 plt.xlabel('Age')
 plt.ylabel('Frequency')
 plt.title('Age Distribution')
 plt.show()
 ```
+
+![Example Age Distribution](../../static/img/ch3/example_age_distribution.png)
 
 ### Quantile-Quantile (QQ) Plots
 
@@ -311,12 +411,14 @@ plt.show()
 import statsmodels.api as sm
 
 # Create a QQ plot
-sm.qqplot(data['weight'], line='s')
+sm.qqplot(data['Cholesterol'], line='s')
 plt.xlabel('Theoretical Quantiles')
 plt.ylabel('Sample Quantiles')
-plt.title('QQ Plot - Weight Distribution')
+plt.title('QQ Plot - Cholesterol Distribution')
 plt.show()
 ```
+
+![Example QQ Plot for Cholesterol](../../static/img/ch3/example_cholesterol_quantile.png)
 
 ### Shapiro-Wilk Test for Normality
 

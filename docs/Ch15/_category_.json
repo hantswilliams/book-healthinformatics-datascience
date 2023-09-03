@@ -1,0 +1,8 @@
+{
+  "label": "Chapter 15 - Deployment Options: Flask, FastAPI, Django, and Streamlit",
+  "position": 16,
+  "link": {
+    "type": "generated-index",
+    "description": "Exploring deployment technologies for your descriptive, inferential, or machine learning models",
+  }
+}
