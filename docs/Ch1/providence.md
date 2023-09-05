@@ -40,14 +40,7 @@ As an example, here is the workflow using DVC, which is very similar to git (git
 
 ![dvc workflow image](../../static/img/ch1/dvc_workflow.png)
 
-<details>
-  <summary>Image Source</summary>
-  <div>
-    <div>
-        <a> MLOps Guide: https://mlops-guide.github.io/Versionamento/ </a>
-    </div>
-  </div>
-</details>
+[Image Source](https://mlops-guide.github.io/Versionamento/)
 
 
 In the rapidly evolving landscape of healthcare technology, establishing robust data provenance practices is not only a legal and ethical imperative but also a means to drive trust in AI-powered clinical applications.

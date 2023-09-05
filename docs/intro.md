@@ -10,7 +10,14 @@ Dive deep into the transformative power of data in modern healthcare.
 
 ## Overview
 
+### What this book is: 
+
 This guide provides a comprehensive overview of how data analytics, machine learning, and other technologies are revolutionizing healthcare systems. Whether you're a healthcare professional, data scientist, student, or enthusiast, there's something for everyone.
+
+### What this book isn't
+Rather than delving a mile deep into any single topic, the aim is to provide a mile-wide view, equipping readers with the foundational knowledge necessary in this expansive field. 
+
+Each chapter encapsulates an area of study so vast that it could very well be the subject of its own book. Thus, while this guide may not exhaust the intricacies of every topic, it strives to illuminate the breadth and depth of what a health informaticist should be familiar with, setting the stage for deeper exploration and application as one's career demands.
 
 ### Some of what you'll learn:
 
@@ -30,15 +37,7 @@ Embarking on this journey is akin to stepping into a realm of possibilities. Muc
 
 ![lego image](../static/img/intro/lego_house.jpg)
 
-<details>
-  <summary>Image Source</summary>
-  <div>
-    <div>
-        <a> Raw Pixle: https://www.rawpixel.com/image/6057749/free-public-domain-cc0-photo </a>
-    </div>
-  </div>
-</details>
-
+[Image Source](https://www.rawpixel.com/image/6057749/free-public-domain-cc0-photo)
 
 Learning a new technology is different; it's a process that takes time. Instead of expecting to grasp everything at once, approach it as a journey. Imagine yourself starting with the basics, learning what you need to complete a specific task. Just like LEGO pieces, each new concept you learn becomes a building block, adding to your growing understanding.
 
