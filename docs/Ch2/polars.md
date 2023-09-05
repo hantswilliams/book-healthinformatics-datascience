@@ -42,6 +42,13 @@ Polars can be used for a variety of health informatics applications, including:
 ## Official Documentation and Intro Tutorial 
 To read the official documentaiton, please visit [Polars Documentation](https://pola-rs.github.io/polars-book/user-guide/)
 
+## Installing
+Just like any other package in python, use your package manager (pip, poetry) and perform:
+
+```bash
+pip install polars
+```
+
 ## Loading Data 
 
 Lets start with a basic example. The abbreviation that we will be using for polars with `p1`. Here is where we will begin:

@@ -1,8 +1,8 @@
 ---
-sidebar_position: 4
+sidebar_position: 6
 ---
 
-# 5.4 Chi-square Tests in Health Research
+# 5.6 Chi-square Tests in Health Research
 
 Chi-square tests are valuable statistical tools used in health research to analyze categorical data and test for associations between variables. This section delves into the concept of chi-square tests, their types, and their applications in healthcare and medical studies.
 

@@ -54,6 +54,24 @@ Feel free to explore these datasets, resources, and tools to enhance your unders
 - [CMS Medicare Claims PUF](https://www.cms.gov/Research-Statistics-Data-and-Systems/Downloadable-Public-Use-Files/BSAPUFS): Publicly available Medicare claims data that provides insights into healthcare utilization, costs, and more.
 - [MTSamples](https://www.mtsamples.com/): A collection of text samples for natural language processing (NLP) tasks in healthcare, including medical transcription examples.
 
+### Other Healthcare Examples:
+- [CMS Medicare Physician and Other Practitioner](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners)
+- [CMS - Medicare - Hospital Operating Costs, Expenditures](https://data.cms.gov/provider-compliance/cost-report/hospital-provider-cost-report/)
+  - "...The Hospital Provider Cost Report dataset provides select measures from the hospital annual cost report. This data includes provider information such as facility characteristics, utilization data, cost and charges by cost center (in total and for Medicare), Medicare settlement data, and financial statement data organized by CMS Certification Number."
+- [Human Mortality Database](https://www.mortality.org/Data/ZippedDataFiles)
+- [CMS Data Portal](https://data.cms.gov/provider-data/?redirect=true)
+- [HCUP Supplmental Files and Researcher Tools](https://hcup-us.ahrq.gov/tools_software.jsp)
+- [1000 Genomes Project](https://registry.opendata.aws/1000-genomes/)
+- [WONDER CDC Query Tool](https://wonder.cdc.gov/)
+- [WHO Data Portal](https://www.who.int/data/collections)
+- [DASH: Child Health and Development Cohort](https://dash.nichd.nih.gov/study/8)
+- [NCI: SEER](https://seer.cancer.gov/data-software/datasets.html)
+- [US: Big Cities: Health Data](https://bigcitieshealthdata.org/)
+
+### Aggregation Sites
+- [More SDoH and other Health Related Datasets by the University of Pittsburg](https://hsls.libguides.com/health-data-sources/data-sets)
+
+
 Feel free to explore these datasets and leverage them for research, analysis, and building your skillset. These open source datasets will serve as valuable resources to enhance your understanding of healthcare data and develop innovative solutions in the field of health informatics. Happy exploring!
 
 *Note: It's always important to review the terms of use and data licensing agreements associated with each dataset before use.*

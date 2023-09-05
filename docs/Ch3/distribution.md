@@ -381,6 +381,23 @@ plt.show()
 
 Understanding the shape and skewness of distribution curves is crucial for accurate data analysis and interpretation. While the idealized normal distribution is rare in healthcare due to the complexities and individual variability in health data, recognizing and working with different distribution shapes can lead to more meaningful insights and informed decision-making in healthcare research and practice.
 
+In addition to these shapes, many other non-normal distributions exist:
+
+- Beta Distribution.
+- Exponential Distribution.
+- Gamma Distribution.
+- Inverse Gamma Distribution.
+- Log-Normal Distribution.
+- Logistic Distribution.
+- Maxwell-Boltzmann Distribution.
+- Poisson Distribution.
+- Skewed Distribution.
+- Symmetric Distribution.
+- Uniform Distribution.
+- Unimodal Distribution.
+- Weibull Distribution.
+
+
 Python provides powerful libraries and tools for analyzing and visualizing distribution curves in health data. You can use these tools to gain insights into the shape of the data, identify outliers, and make informed decisions in healthcare analysis. Here are some ways you can use Python for distribution analysis:
 
 ### Visualizing Distributions

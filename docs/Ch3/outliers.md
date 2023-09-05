@@ -31,6 +31,8 @@ plt.title("Scatter Plot of Systolic Blood Pressure")
 plt.show()
 ```
 
+![Example Outlier Detection](../../static/img/ch3/example_outlier_detection.png)
+
 ### Z-Score
 The Z-score measures how many standard deviations an observation is away from the mean. If the Z-score is above a certain threshold (usually 2 or 3), the data point is considered an outlier.
 
@@ -41,7 +43,7 @@ import numpy as np
 from scipy.stats import zscore
 
 # Sample cholesterol data
-cholesterol_levels = [180, 210, 190, 220, 250, 280, 230, 195, 200, 290]
+cholesterol_levels = [180, 210, 190, 220, 500, 280, 230, 195, 200, 290]
 
 # Calculate Z-scores
 z_scores = zscore(cholesterol_levels)
@@ -52,7 +54,17 @@ threshold = 2
 # Identify outliers
 outliers = np.where(np.abs(z_scores) > threshold)
 
-print("Indices of outliers:", outliers)
+# Fetch outlier values using the identified indices
+outlier_values = [cholesterol_levels[i] for i in outlier_indices]
+
+print("Outlier Indices in Array:", outliers)
+print("Outlier Values:", outlier_values)
+
+```
+
+```yaml
+Outlier Indices in Array: (array([4]),)
+Outlier Values: [500]
 ```
 
 ### IQR (Interquartile Range)
@@ -79,6 +91,10 @@ outliers = [x for x in heart_rates if x < threshold_lower or x > threshold_upper
 print("Outliers:", outliers)
 ```
 
+```yaml
+Outliers: [120, 50]
+```
+
 ### Modified Z-Score
 Similar to the Z-score but using the median and median absolute deviation (MAD) instead of the mean and standard deviation. This makes it more robust to extreme values.
 
@@ -86,6 +102,7 @@ Suppose you have a dataset of patient glucose levels. You want to identify extre
 
 ```python
 from statsmodels import robust
+import numpy as np
 
 # Sample glucose data
 glucose_levels = [100, 105, 102, 98, 108, 140, 95, 110, 112, 120, 90]
@@ -100,10 +117,20 @@ modified_z_scores = 0.6745 * (glucose_levels - median) / mad
 # Set threshold for outlier detection
 threshold = 2
 
-# Identify outliers
-outliers = np.where(np.abs(modified_z_scores) > threshold)
+# Identify outlier indices
+outlier_indices = np.where(np.abs(modified_z_scores) > threshold)[0]
 
-print("Indices of outliers:", outliers)
+# Fetch outlier values using the identified indices
+outlier_values = [glucose_levels[i] for i in outlier_indices]
+
+print("Indices of outliers:", outlier_indices)
+print("Values of outliers:", outlier_values)
+
+```
+
+```yaml
+Indices of outliers: [5]
+Values of outliers: [140]
 ```
 
 In the above example, the value 0.6745 in the modified Z-score formula is a constant factor that makes the modified Z-score comparable to the standard Z-score when dealing with normally distributed data. In a standard normal distribution, about 0.6745 of the data falls within one standard deviation from the mean. By using this constant, the modified Z-score retains a similar scale and interpretation.
@@ -117,8 +144,17 @@ A density-based method that measures the local deviation of density of a data po
 
 Imagine you have a dataset of patient response times to a specific treatment. You want to identify patients with significantly different response times.
 
+In the Local Outlier Factor (LOF) method:
+- 1 is used to label an instance as "inlier" or a regular point.
+- -1 is used to label an instance as "outlier".
+
+Here's how to interpret the expected output:
+- If an entry in the output has the value 1, it means that corresponding data point (from the original response_times list) is considered normal or an inlier by the LOF algorithm.
+- If an entry in the output has the value -1, it means that the corresponding data point is considered anomalous or an outlier by the LOF algorithm.
+
 ```python
 from sklearn.neighbors import LocalOutlierFactor
+import numpy as np
 
 # Sample response time data
 response_times = [10, 12, 15, 18, 20, 25, 30, 5, 40, 22, 50]
@@ -130,9 +166,19 @@ X = np.array(response_times).reshape(-1, 1)
 lof = LocalOutlierFactor(n_neighbors=5, contamination=0.1)
 
 # Fit the model and predict outliers
-outliers = lof.fit_predict(X)
+outlier_labels = lof.fit_predict(X)
 
-print("Outlier labels:", outliers)
+# Fetch the outlier values using the identified labels (-1)
+outlier_values = [response_times[i] for i, label in enumerate(outlier_labels) if label == -1]
+
+print("Outlier labels:", outlier_labels)
+print("Values of outliers:", outlier_values)
+
+```
+
+```yaml
+Outlier labels: [ 1  1  1  1  1  1  1  1  1  1 -1]
+Values of outliers: [50]
 ```
 
 
