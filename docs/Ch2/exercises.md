@@ -23,7 +23,7 @@ Delve deeper into data manipulation using Python's prominent libraries. Explore 
 
 #### **3. Introduction to Alternative Libraries:**
 - Read about Polars, Dask, and Modin.
-- Load your dataset using each of these libraries in separate code cells.
+- Load your dataset using Polars and Modin in separate code cells.
 - Compare the load times and write your observations in a markdown cell.
 
 ### **4. Submission**:

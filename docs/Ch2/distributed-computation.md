@@ -8,7 +8,6 @@ sidebar_position: 3
 
 For truly big health informatics datasets reaching into the billions of records, distributed computing frameworks like Dask, Ray, and Modin become essential. These tools leverage clusters of machines to break down data processing tasks into smaller units that can be executed in parallel. By distributing the workload across multiple nodes, these frameworks overcome memory limitations and enable efficient handling of vast datasets, ensuring high-performance data analysis and processing.
 
-
 For those gargantuan health datasets, Dask, Ray, and Modin come to the rescue:
 - **Scaling Pandas**: These libraries enhance Pandas' capabilities, allowing it to handle large-scale health data smoothly.
 - **Parallel Processing**: Accelerate computations, be it for genomic sequences or analyzing vast patient cohorts.
@@ -32,8 +31,34 @@ But first, we need to understand a key concept - distributed computing.
 
 ---
 
+## Understanding Threading and Computing Paradigms in Healthcare
 
-## Distributed Computing
+### Threading: Single vs. Multi
+
+**Single Threading**:
+- Think of single-threading as a single doctor attending to patients one at a time. Even if other patients are ready, they have to wait their turn.
+- Ideal for medical tasks that require undivided attention, like a delicate surgery.
+- Just as a doctor can be held up by unexpected complications in a procedure, a single thread can be delayed by I/O operations.
+
+**Multi Threading**:
+- Picture a team of doctors in an emergency room, each attending to a different patient simultaneously.
+- While one doctor waits for test results (akin to I/O operations), another can continue administering treatment.
+- Challenges arise when doctors need to share resources, like the sole available operating room. Similarly, threads can face challenges sharing data or resources.
+
+### Parallel Processing
+
+- **Concept**: Similar to multiple hospital departments (e.g., radiology, cardiology, and neurology) working at the same time to diagnose and treat a patient.
+- Different departments (CPU cores) handle different tests and treatments but work toward the overall health of the patient (completing the task).
+- For instance, analyzing multiple MRI slices of a patient's brain can be distributed across different processors to speed up the diagnosis.
+- Coordination between departments (or CPU cores) is crucial, much like ensuring consistent patient care across specialties.
+
+### Distributed Computing
+
+- **Definition**: Imagine a network of hospitals in a large city. While each hospital (node) operates independently with its own staff and equipment, they might collaborate on large-scale health initiatives or research.
+- A patient's health data could be distributed across these hospitals but can be collectively analyzed for patterns, much like distributed systems processing large datasets.
+- Using telemedicine as an analogy, even if one hospital faces an outage, the patient can still be treated via another hospital in the network, highlighting the fault tolerance of distributed systems.
+- Systems like Hadoop and Spark in the computing world can be likened to coordinated healthcare networks working on large-scale public health projects.
+
 
 Distributed computing is a paradigm that involves utilizing multiple interconnected machines to collectively solve complex problems or process large amounts of data. This approach enables tasks to be divided into smaller subtasks, which are then distributed across different nodes for parallel processing. Distributed computing is crucial for handling massive datasets and resource-intensive computations in various domains, including health informatics.
 

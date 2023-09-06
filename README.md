@@ -2,6 +2,14 @@
 
 This book is built with [Docusaurus](https://v2.docusaurus.io)
 
+## Parts that need to be updated:
+
+- [x] 1.10: Additional JSON examples of loading json data where the data (raw) is nested with a key:value pair and not at the top level 
+- [ ] 2.1: More examples for extracting rows based on rules 
+- [ ] 2.1: Give example output for z-score removal of outliers 
+- [ ] 2.2: Add in time check example for POLARS versus PANDAS 
+
+
 ## Want to deploy/create your own?
 
 Deploy your own Docusaurus documentation or ebook (based on markdown) project with Vercel now.

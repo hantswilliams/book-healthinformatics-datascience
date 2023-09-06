@@ -39,6 +39,180 @@ Polars can be used for a variety of health informatics applications, including:
 * **Data analysis:** Polars can be used to analyze health data. This can help researchers to answer questions about the data, such as the risk factors for a particular disease or the effectiveness of a treatment.
 * **Data visualization:** Polars can be used to visualize health data. This can help researchers to communicate their findings to others.
 
+### What are Tensors?
+
+Tensors are a generalization of scalars, vectors, and matrices and can be thought of as multi-dimensional arrays. In essence, tensors provide a consistent framework for organizing data in many dimensions, not just one (like a scalar), two (like a matrix), or three.
+
+- **Scalar**: A 0-dimensional tensor. E.g., `5`
+- **Vector**: A 1-dimensional tensor. E.g., `[1, 2, 3]`
+- **Matrix**: A 2-dimensional tensor. E.g., 
+    ```
+    [[1, 2],
+     [3, 4],
+     [5, 6]]
+    ```
+- **3D Tensor**: Think of a cube where each cell represents a data point. This might be used to store RGB values for a set of images, with dimensions `[height, width, color_channels]`.
+
+Tensors are fundamental in fields like deep learning, where they can be used to represent everything from data to the parameters and structure of the model itself. Libraries such as TensorFlow and PyTorch are named after the "tensor" due to its central role in deep learning operations.
+
+### Tensors vs. Pandas DataFrames
+
+At a high level, both tensors and Pandas DataFrames are used for data storage and manipulation. However, there are distinct differences:
+
+1. **Dimensionality**:
+    - **Tensors**: Can be of any dimension, from 0-dimensional (scalars) up to n-dimensional.
+    - **Pandas DataFrames**: Essentially 2-dimensional tables. While you can have multi-indexing to simulate higher dimensions, the data structure itself is a 2D table.
+
+2. **Data Homogeneity**:
+    - **Tensors**: Must be homogenous; all elements are of the same type.
+    - **Pandas DataFrames**: Can store heterogeneous data. Different columns can have different data types.
+
+3. **Operations**:
+    - **Tensors**: Primarily designed for mathematical operations. They're optimized for large-scale mathematical computations.
+    - **Pandas DataFrames**: Designed for data wrangling, cleaning, and analysis. It provides a wide range of functionalities like groupby, merge, and pivot, which are not naturally present for tensors.
+
+4. **Use Cases**:
+    - **Tensors**: Mainly used in fields like deep learning and scientific computing where high-performance multi-dimensional mathematical operations are required.
+    - **Pandas DataFrames**: Best suited for data analysis tasks where you need to manipulate, explore, visualize, or preprocess data.
+
+5. **Flexibility**:
+    - **Tensors**: Typically more rigid because of their strict homogeneity and dimensional structure.
+    - **Pandas DataFrames**: Offer more flexibility for data manipulation and come with a rich set of built-in functions for data analysis.
+
+6. **Underlying Language**:
+    - **Tensors**: Many tensor libraries (like TensorFlow) have interfaces in Python but are optimized with low-level languages for performance.
+    - **Pandas DataFrames**: Written in Python, with critical parts optimized using Cython for better performance.
+
+#### Example: 3-Dimensional Tensor: Medical Imaging Stacks
+
+For simplicity, let's assume each image slice in our CT scan is a 3x3 grayscale image, and we have 5 slices stacked together to form our 3D tensor.
+
+``` python
+import numpy as np
+
+# Creating a 3D tensor for CT slices
+# 3x3 for image dimensions and 5 slices
+ct_slices = np.array([
+    [[0.1, 0.2, 0.3], [0.4, 0.5, 0.6], [0.7, 0.8, 0.9]],
+    [[0.2, 0.3, 0.4], [0.5, 0.6, 0.7], [0.8, 0.9, 1.0]],
+    [[0.3, 0.4, 0.5], [0.6, 0.7, 0.8], [0.9, 1.0, 1.1]],
+    [[0.4, 0.5, 0.6], [0.7, 0.8, 0.9], [1.0, 1.1, 1.2]],
+    [[0.5, 0.6, 0.7], [0.8, 0.9, 1.0], [1.1, 1.2, 1.3]],
+])
+
+print(ct_slices)
+print(ct_slices.shape)  # Output: (5, 3, 3)
+```
+```text
+
+[[[0.1 0.2 0.3]
+  [0.4 0.5 0.6]
+  [0.7 0.8 0.9]]
+
+ [[0.2 0.3 0.4]
+  [0.5 0.6 0.7]
+  [0.8 0.9 1. ]]
+
+ [[0.3 0.4 0.5]
+  [0.6 0.7 0.8]
+  [0.9 1.  1.1]]
+
+ [[0.4 0.5 0.6]
+  [0.7 0.8 0.9]
+  [1.  1.1 1.2]]
+
+ [[0.5 0.6 0.7]
+  [0.8 0.9 1. ]
+  [1.1 1.2 1.3]]]
+(5, 3, 3)
+
+```
+
+
+#### Example: 4-Dimensional Tensor: Time-Series of Medical Imaging Stacks
+
+Assuming that our patient gets an MRI scan every month for 3 months and each MRI scan is represented as the 3D tensor described above:
+
+``` python
+# Creating a 4D tensor for MRI scans over 3 months
+# Each month has the 3D tensor we created above
+
+mri_scans_over_months = np.array([ct_slices, ct_slices + 0.1, ct_slices + 0.2])
+
+print(mri_scans_over_months)
+print(mri_scans_over_months.shape)  # Output: (3, 5, 3, 3)
+```
+
+```text
+
+[[[[0.1 0.2 0.3]
+   [0.4 0.5 0.6]
+   [0.7 0.8 0.9]]
+
+  [[0.2 0.3 0.4]
+   [0.5 0.6 0.7]
+   [0.8 0.9 1. ]]
+
+  [[0.3 0.4 0.5]
+   [0.6 0.7 0.8]
+   [0.9 1.  1.1]]
+
+  [[0.4 0.5 0.6]
+   [0.7 0.8 0.9]
+   [1.  1.1 1.2]]
+
+  [[0.5 0.6 0.7]
+   [0.8 0.9 1. ]
+   [1.1 1.2 1.3]]]
+
+
+ [[[0.2 0.3 0.4]
+   [0.5 0.6 0.7]
+   [0.8 0.9 1. ]]
+
+  [[0.3 0.4 0.5]
+   [0.6 0.7 0.8]
+   [0.9 1.  1.1]]
+
+  [[0.4 0.5 0.6]
+   [0.7 0.8 0.9]
+   [1.  1.1 1.2]]
+
+  [[0.5 0.6 0.7]
+   [0.8 0.9 1. ]
+   [1.1 1.2 1.3]]
+
+  [[0.6 0.7 0.8]
+   [0.9 1.  1.1]
+   [1.2 1.3 1.4]]]
+
+
+ [[[0.3 0.4 0.5]
+   [0.6 0.7 0.8]
+   [0.9 1.  1.1]]
+
+  [[0.4 0.5 0.6]
+   [0.7 0.8 0.9]
+   [1.  1.1 1.2]]
+
+  [[0.5 0.6 0.7]
+   [0.8 0.9 1. ]
+   [1.1 1.2 1.3]]
+
+  [[0.6 0.7 0.8]
+   [0.9 1.  1.1]
+   [1.2 1.3 1.4]]
+
+  [[0.7 0.8 0.9]
+   [1.  1.1 1.2]
+   [1.3 1.4 1.5]]]]
+(3, 5, 3, 3)
+
+
+```
+
+Here, the first dimension is time (3 months), followed by the 3D representation of the MRI scan. The numbers in the fake tensors are arbitrary and don't represent any real or medical significance. They're just for representation. In real scenarios, these values would typically be pixel intensity values for medical images, scaled between 0 and 1 or 0 and 255.
+
 ## Official Documentation and Intro Tutorial 
 To read the official documentaiton, please visit [Polars Documentation](https://pola-rs.github.io/polars-book/user-guide/)
 

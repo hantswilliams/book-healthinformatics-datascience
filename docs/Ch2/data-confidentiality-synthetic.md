@@ -187,6 +187,37 @@ df = pd.DataFrame(data)
 print(df)
 ```
 
+```text
+
+              Name  Age  HeartRate BloodPressure             AssessmentDate
+0    Joshua Murphy   40         69         94/65 2023-08-21 16:40:37.355235
+1      Jesus Young   76        100         98/73 2023-08-17 16:40:37.355235
+2     Dale Jimenez   67         73        106/66 2023-09-05 16:40:37.355235
+3    Jill Saunders   73         75        119/87 2023-08-11 16:40:37.355235
+4  Rebecca Charles   48         91         95/73 2023-08-28 16:40:37.355235
+5      Laurie Ruiz   48         88        128/79 2023-08-19 16:40:37.355235
+6    Diana Edwards   72         66        115/85 2023-08-25 16:40:37.355235
+7       Megan Wood   19         81        121/66 2023-08-29 16:40:37.355235
+8   Michelle Brown   69         75        105/67 2023-09-04 16:40:37.355235
+9     James Little   43         60        122/65 2023-08-29 16:40:37.355235
+
+```
+
+In the code above, the `_` is being used within list comprehensions. Here's a breakdown:
+
+```python
+[faker.name() for _ in range(num_patients)]
+```
+
+This line creates a list of fake names. The length of this list is determined by `num_patients`. The `range(num_patients)` function generates a sequence of numbers from 0 to `num_patients - 1`. The loop essentially iterates over each of these numbers.
+
+However, in this context, you don't care about the actual numbers produced by `range(num_patients)`; you just want to repeat the `faker.name()` operation `num_patients` times. 
+
+**So, instead of using a typical loop variable like `i`, the code uses `_` to signify "I don't care about this value; I'm just using it for looping."**
+
+The same logic applies to the other list comprehensions in your dictionary. Each one generates a list with `num_patients` number of entries, but the value produced by `range(num_patients)` is not used in the operation itself, so `_` is used to indicate that.
+
+
 #### Example 2 
 
 Here's another example below of how you can use the `Faker` library along with `pandas` to create a DataFrame containing general synthetic healthcare-related data. The Faker library is used to generate fake data for patient names, addresses, phone numbers, medical conditions, and ages. The generated data is then organized into a pandas DataFrame. This DataFrame can be used for various purposes, such as testing code, building prototypes, or demonstrating analysis techniques, while maintaining data privacy and confidentiality.
@@ -210,4 +241,16 @@ data = {
 df = pd.DataFrame(data)
 
 print(df)
+```
+
+```text
+
+	Name	        Address	                                            Phone	                MedicalCondition	Age
+0	Lauren Mason	77881 Kristy Landing\nPaulport, VA 41875	        525.355.6923x516	    Hypertension	    73
+1	Brooke Ibarra	0347 Larry Radial Apt. 968\nLake Karinamouth, ...	(965)431-4064	        Diabetes	        35
+2	Bobby Dennis	85430 Villarreal Hills\nArmstrongbury, KS 13445	    001-480-255-6699x1041	Obesity	            82
+3	Leah Clark	7126 Jeremy Expressway\nEast Donshire, NE 10977	        261.836.2985	        Hypertension	    49
+4	Jennifer Robinson	4844 Jones Forges Apt. 770\nLake Paulchester,   (760)751-9401x73769	    Asthma	            55
+
+
 ```

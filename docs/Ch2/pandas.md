@@ -116,6 +116,238 @@ Pandas' `.describe()` function generates descriptive statistics for numerical co
 print(data.describe())
 ```
 
+
+Of course! Let's dive into `groupby` and pivot tables in pandas:
+
+---
+
+### Groupby and Pivot Tables in Pandas
+
+Pandas provides powerful and flexible tools to aggregate and transform datasets. Two of the most commonly used functions for this purpose are `groupby` and pivot tables.
+
+By leveraging `groupby` and pivot tables, you can reshape, transform, and aggregate your data in various ways to gain insights. It's particularly useful when dealing with large datasets where such summarizations can provide valuable perspectives on the underlying patterns in the data.
+
+#### Groupby
+
+The `groupby` method allows you to group rows of data together based on some column value and then apply a function such as `sum` or `mean` to each group, effectively aggregating the data.
+
+Let's say we want to group patients based on their diagnosis and then find the average cholesterol level for each group.
+
+**Basic Usage**:
+
+```python
+data.groupby('column_to_groupby').function_to_apply()
+```
+
+#### Pivot Tables
+
+Pivot tables are used to summarize and aggregate data inside a dataframe. It's particularly useful when you want to transform data from a long format to a wide format.
+
+If we want to see average blood pressure readings across different age groups for males and females, a pivot table would be a great choice.
+
+**Basic Usage**:
+
+```python
+data.pivot_table(index='row_name', columns='column_name', values='values_column', aggfunc='function_to_apply')
+```
+
+#### Synthetic Dataset
+
+Now lets create a synthetic dataset to illustrate these functions.
+
+```python
+import numpy as np
+import pandas as pd
+from faker import Faker
+
+fake = Faker()
+np.random.seed(42)
+
+# Generate sample data
+num_samples = 100
+
+patients = [fake.name() for _ in range(num_samples)]
+diagnoses = ['Diabetes', 'Hypertension', 'Cardiovascular Disease', 'Healthy']
+diagnosis_data = [np.random.choice(diagnoses) for _ in range(num_samples)]
+age_data = np.random.randint(20, 80, num_samples)
+cholesterol_data = np.random.randint(150, 250, num_samples)  # in mg/dL
+bp_data = np.random.randint(80, 160, num_samples)  # systolic blood pressure
+genders = ['Male', 'Female']
+gender_data = [np.random.choice(genders) for _ in range(num_samples)]
+
+data = pd.DataFrame({
+    'Patient Name': patients,
+    'Diagnosis': diagnosis_data,
+    'Age': age_data,
+    'Cholesterol': cholesterol_data,
+    'Blood Pressure': bp_data,
+    'Gender': gender_data
+})
+
+print(data.head())
+
+```
+
+```text
+
+
+Patient Name	Diagnosis	Age	Cholesterol	Blood Pressure	Gender
+0	Tammy Johns	Cardiovascular Disease	37	243	146	Male
+1	Amy Duncan	Healthy	45	172	98	Female
+2	Edward Sexton	Diabetes	63	164	99	Female
+3	Tina Smith	Cardiovascular Disease	53	192	150	Female
+4	Nathaniel Ross	Cardiovascular Disease	29	178	131	Female
+...	...	...	...	...	...	...
+95	Ann Zuniga	Hypertension	58	152	146	Male
+96	Christine Ross	Hypertension	68	169	97	Female
+97	Mark Cooke	Healthy	71	208	104	Female
+98	Jennifer Clark	Hypertension	51	185	133	Female
+99	Christopher Webster	Diabetes	23	168	137	Female
+100 rows × 6 columns
+
+```
+
+#### Using `groupby`
+
+Grouping by `Diagnosis` and finding the mean (average) of `Cholesterol`:
+
+```python
+grouped_data = data.groupby('Diagnosis').agg({
+    'Cholesterol': 'mean'
+})
+print(grouped_data)
+
+```
+
+```text
+
+                        Cholesterol
+Diagnosis                          
+Cardiovascular Disease   205.375000
+Diabetes                 194.700000
+Healthy                  194.133333
+Hypertension             204.192308
+
+```
+
+The `.agg()` function in pandas is used to aggregate data using one or multiple operations over specified axes. It's quite versatile and can accept a wide range of functions or operations. Some common aggregation functions available to us are:
+
+- **Basic Statistics**:
+  - `'sum'`: Compute sum of group values.
+  - `'mean'`: Compute mean of group values.
+  - `'median'`: Compute median of group values.
+  - `'std'`: Standard deviation of group values.
+  - `'var'`: Compute variance of group values.
+  - `'min'`: Compute minimum of group values.
+  - `'max'`: Compute maximum of group values.
+  
+- **Count**:
+  - `'count'`: Count non-NA/null values of group values.
+  - `'nunique'`: Count number of distinct elements in group.
+  
+- **First and Last Items**:
+  - `'first'`: Compute first of group values.
+  - `'last'`: Compute last of group values.
+  
+- **Others**:
+  - `'prod'`: Compute product of group values.
+  - `'sem'`: Standard error of the mean of groups.
+
+Beyond these basic functions, `.agg()` can also accept custom functions. For example:
+
+```python
+def range_func(x):
+    return x.max() - x.min()
+
+grouped_data = data.groupby('Diagnosis').agg({
+    'Cholesterol': range_func
+})
+```
+
+This custom function calculates the range of the `Cholesterol` values within each group.
+
+For more advanced aggregation needs, `.agg()` can accept a dictionary where keys are columns, and values are lists of functions/operations to be applied to that column.
+
+Furthermore, you can find the comprehensive list of aggregation methods and their details in the official [pandas documentation](https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html#aggregation). 
+
+Always refer to the official documentation for the most up-to-date and detailed information on available functions and methods.
+
+
+
+
+#### Using Pivot Tables
+
+Creating a pivot table that shows the average `Blood Pressure` for each age group, separated by `Gender`:
+
+```python
+data['Age Group'] = pd.cut(data['Age'], bins=[20, 40, 60, 80], labels=['20-40', '40-60', '60-80'])
+pivot_data = data.pivot_table(index='Age Group', columns='Gender', values='Blood Pressure', aggfunc='mean')
+print(pivot_data)
+
+```
+
+```
+
+Gender         Female        Male
+Age Group                        
+20-40      118.500000  122.750000
+40-60      116.105263  120.300000
+60-80      112.166667  105.111111
+
+```
+
+We could also do average Cholesterol by Gender and Age Group. For this, let's assume we want to divide our patients into three age groups: "Young" (age < 30), "Middle-aged" (30 <= age < 50), and "Senior" (age >= 50). We will then compute the average cholesterol level for each combination of gender and age group.
+
+To classify our patients into age groups, we can use the `pd.cut()` function:
+
+```python
+import pandas as pd
+from faker import Faker
+import numpy as np
+
+# Define age bins
+bins = [0, 30, 50, np.inf]
+labels = ['Young', 'Middle-aged', 'Senior']
+
+data['Age Group'] = pd.cut(data['Age'], bins=bins, labels=labels, right=False)
+
+# Pivot table for average cholesterol by gender and age group
+avg_cholesterol_pivot = data.pivot_table(values='Cholesterol', index='Gender', columns='Age Group', aggfunc='mean')
+print(avg_cholesterol_pivot)
+```
+
+```text
+
+Age Group       Young  Middle-aged      Senior
+Gender                                        
+Female     199.357143   200.529412  199.500000
+Male       203.250000   197.375000  199.952381
+
+```
+
+Or, we could count how many male and female patients fall into each diagnosis category. This is a straightforward pivot table where we're counting occurrences:
+
+```python
+diagnosis_pivot = data.pivot_table(values='Age', index='Diagnosis', columns='Gender', aggfunc='count')
+print(diagnosis_pivot)
+```
+
+```text
+
+Gender                  Female  Male
+Diagnosis                           
+Cardiovascular Disease      14    10
+Diabetes                    10    10
+Healthy                     18    12
+Hypertension                17     9
+
+```
+
+These pivot tables provide summarized views of the data based on specific groupings and metrics, allowing healthcare professionals to glean insights about different patient demographics and health metrics.
+
+
+
+
 ## Data Cleaning and Preprocessing
 
 Data cleaning and preprocessing serve as foundational pillars in ensuring the accuracy, reliability, and meaningfulness of your analyses. Effective data cleaning not only eradicates inconsistencies and inaccuracies but also paves the way for accurate interpretation and decision-making. Here are some essential tasks to consider when preparing your healthcare dataset:
@@ -174,6 +406,9 @@ data.dropna(inplace=True)
 
 # Fill missing values in a column with a specific value
 data['Weight'].fillna(0, inplace=True)
+
+# Or if we want to fill missing values for all columns:
+data.fillna(0, inplace=True)
 ```
 
 ### Ensuring Data Types
@@ -217,11 +452,56 @@ data.drop_duplicates(inplace=True)
 
 Outliers are extreme data points that can distort statistical analyses. Detecting and addressing outliers is particularly crucial in healthcare, where data anomalies can impact patient outcomes and research results. You can use statistical methods, such as the Z-score, or domain knowledge to identify outliers. Alongside Pandas, the widely-used NumPy library provides powerful numerical and mathematical tools that can enhance the accuracy and effectiveness of outlier detection and analysis. We will explore more examples of NumPy's capabilities later. 
 
+Lets first create some outliers:
+
 ```python
+
 import numpy as np
+import pandas as pd
+from faker import Faker
+
+fake = Faker()
+
+# Generate a sample dataset
+num_records = 1000
+data = pd.DataFrame({
+    'Name': [fake.name() for _ in range(num_records)],
+    'avgHeartRate': [fake.random_int(min=50, max=130) for _ in range(num_records)]
+})
+
+# Introduce some outliers
+outliers_to_insert = 10  # for demonstration purposes
+for _ in range(outliers_to_insert):
+    data.at[fake.random_int(min=0, max=num_records-1), 'avgHeartRate'] = fake.random_int(min=200, max=250)  # these are our outliers
+```
+
+```text
+
+	Name	avgHeartRate
+0	Kellie Ray	80
+1	Frederick Kim	61
+2	Christopher Tran	73
+3	Steven Clark	80
+4	Deborah Willis	116
+...	...	...
+995	Gina West	77
+996	Jessica Schwartz	116
+997	Jeffrey Barnes	76
+998	Jacqueline Peterson	99
+999	Jennifer Harris	60
+
+```
+
+Now lets calculate the z-scores. The Z-score measures how many standard deviations an observation is away from the mean. If the Z-score is above a certain threshold (usually 2 or 3), the data point is considered an outlier.
+
+
+```python
 
 # Calculate the Z-score for a column
-z_scores = np.abs((data['Value'] - data['Value'].mean()) / data['Value'].std())
+z_scores = np.abs((data['avgHeartRate'] - data['avgHeartRate'].mean()) / data['avgHeartRate'].std())
+
+# Add Z-scores as a new column in the dataframe
+data['Z_Scores'] = z_scores
 
 # Define a threshold for outlier detection
 threshold = 3
@@ -229,6 +509,25 @@ threshold = 3
 # Identify and treat outliers
 outliers = data[z_scores > threshold]
 data = data[z_scores <= threshold]
+
+```
+
+**Outliers**:
+
+```text
+
+                  Name  avgHeartRate  Z_Scores
+250    Miranda Barnes           226  4.998898
+340    Maurice Walter           215  4.589857
+351     Bruce Carlson           226  4.998898
+386      Aaron Malone           243  5.631054
+458      Cynthia Pena           242  5.593868
+578  Robert Alexander           213  4.515485
+631    Austin Coleman           231  5.184826
+655     Ronald Willis           208  4.329557
+902        Adam Casey           228  5.073269
+919   Patricia Santos           219  4.738599
+
 ```
 
 By identifying and removing duplicates and outliers, you ensure that your analysis is based on reliable and accurate data, leading to more meaningful insights in healthcare research and decision-making.
