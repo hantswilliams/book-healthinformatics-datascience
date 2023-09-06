@@ -215,6 +215,8 @@ Now lets create another synthetic dataset to illustrate these functions.
 import numpy as np
 import pandas as pd
 from faker import Faker
+from tabulate import tabulate
+
 
 fake = Faker()
 np.random.seed(42)
@@ -240,7 +242,7 @@ data = pd.DataFrame({
     'Gender': gender_data
 })
 
-print(data.head())
+print(tabulate(data.sample(5), headers='keys', tablefmt='grid'))
 
 ```
 
