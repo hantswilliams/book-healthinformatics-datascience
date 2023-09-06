@@ -11,10 +11,12 @@ Delve deeper into data manipulation using Python's prominent libraries. Explore 
 ### **Instructions**:
 
 #### **1. Data Cleaning with Pandas:**
-- Load a dataset of your choice in your Colab notebook (preferably one from the previous assignment).
+- Load a dataset of your choice in your Colab notebook (preferably one from the previous assignment) **OR** in a new python script.
 - Identify and handle missing values in the dataset.
 - Remove any duplicate rows and columns, if they exist.
-- Add a markdown cell to document the changes made to the dataset.
+- Clean column names 
+- Add either a markdown cell if using a notebook, or comments if using a script, to document the changes made to the dataset.
+
 
 #### **2. Data Transformation:**
 - Create new columns based on existing ones (e.g., if you have a 'birth_date' column, create an 'age' column).
@@ -22,9 +24,10 @@ Delve deeper into data manipulation using Python's prominent libraries. Explore 
 - Use pivot tables or cross-tabulations for multi-dimensional analysis.
 
 #### **3. Introduction to Alternative Libraries:**
-- Read about Polars, Dask, and Modin.
-- Load your dataset using Polars and Modin in separate code cells.
-- Compare the load times and write your observations in a markdown cell.
+- Read about Polars, Dask, and Modin in Chapter 2.
+- Load your dataset using Polars and Modin.
+- Compare the load times and write your observations in a markdown cell or in your script.
+  - Please see [Chapter 2 - Adv Exercises](https://book.datascience.appliedhealthinformatics.com/docs/Ch2/distributed-computation#advanced-exercises) to see how to use the `import time` module as an example of capturing start time and end time
 
 ### **4. Submission**:
 - Create a new GitHub repository named `datasci_2_manipulation` in your GitHub account.
