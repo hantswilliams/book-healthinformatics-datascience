@@ -14,6 +14,62 @@ Before delving into complex analyses, creating pivot tables, or extracting meani
 
 Pandas offers a diverse set of functions designed to facilitate this initial exploration. By leveraging metadata-driven operations, you can efficiently inspect the underlying characteristics of your DataFrame, such as its shape, data types, and basic statistical summaries. This crucial step forms the foundation for subsequent data manipulation and analysis tasks, enabling you to make informed decisions and extract valuable insights from your healthcare dataset.
 
+Lets first create a fake dataset to play with:
+
+```python
+
+import pandas as pd
+from faker import Faker
+import random
+from tabulate import tabulate
+
+# Initialize faker
+fake = Faker()
+
+# Number of records
+num_patients = 100
+
+# Generate data
+data = {
+    'PatientID': [i for i in range(1, num_patients + 1)],
+    'Gender': [fake.random_element(elements=('Male', 'Female')) for _ in range(num_patients)],
+    'Name': [fake.name() for _ in range(num_patients)],
+    'Age': [fake.random_int(min=1, max=100) for _ in range(num_patients)],
+    'Diseases': [fake.random_element(elements=('Diabetes', 'Hypertension', 'Asthma', 'None')) for _ in range(num_patients)],
+    'AvgHR': [fake.random_int(min=60, max=100) for _ in range(num_patients)],
+    'AvgBP': [f"{random.randint(90, 140)}/{random.randint(60, 90)}" for _ in range(num_patients)],
+    'City': [fake.city() for _ in range(num_patients)],
+    'State': [fake.state() for _ in range(num_patients)],
+    'Zipcode': [fake.zipcode() for _ in range(num_patients)],
+    'LastVisit': [fake.date_this_decade() for _ in range(num_patients)]
+}
+
+# Convert to DataFrame
+data = pd.DataFrame(data)
+
+print(tabulate(data.sample(5), headers='keys', tablefmt='grid'))
+
+```
+
+**Expected dataframe model:**
+
+```text
+
++----+-------------+----------+--------------------+-------+--------------+---------+---------+------------------+------------+-----------+-------------+
+|    |   PatientID | Gender   | Name               |   Age | Diseases     |   AvgHR | AvgBP   | City             | State      |   Zipcode | LastVisit   |
++====+=============+==========+====================+=======+==============+=========+=========+==================+============+===========+=============+
+| 17 |          18 | Female   | Alyssa Murphy      |    13 | Diabetes     |      73 | 102/80  | Hendersonfurt    | Nevada     |     58192 | 2021-08-09  |
++----+-------------+----------+--------------------+-------+--------------+---------+---------+------------------+------------+-----------+-------------+
+| 75 |          76 | Male     | Nicole Mitchell MD |     4 | Hypertension |      75 | 119/73  | Stevenstown      | New Jersey |     69483 | 2022-11-10  |
++----+-------------+----------+--------------------+-------+--------------+---------+---------+------------------+------------+-----------+-------------+
+| 43 |          44 | Male     | Rebecca Johnson    |    59 | Hypertension |      94 | 117/73  | Morganville      | Georgia    |     06407 | 2020-06-23  |
++----+-------------+----------+--------------------+-------+--------------+---------+---------+------------------+------------+-----------+-------------+
+| 88 |          89 | Male     | Richard Wade       |    39 | Asthma       |      90 | 119/75  | East Mallory     | Maryland   |     55890 | 2022-07-24  |
++----+-------------+----------+--------------------+-------+--------------+---------+---------+------------------+------------+-----------+-------------+
+|  5 |           6 | Female   | Michael Gallegos   |     9 | Hypertension |     100 | 109/67  | Port Ericchester | Alaska     |     44422 | 2020-11-14  |
++----+-------------+----------+--------------------+-------+--------------+---------+---------+------------------+------------+-----------+-------------+
+```
+
 ### Checking Size and Shape
 
 To understand the size and shape of a loaded DataFrame, you can use the `.shape` attribute. This attribute returns a tuple representing the number of rows and columns in the DataFrame.
@@ -77,7 +133,7 @@ To extract a specific column from the DataFrame, use the column name enclosed in
 ages = data['Age']
 
 # Extract multiple columns
-subset = data[['Name', 'Location']]
+subset = data[['Name', 'City']]
 ```
 
 Now if you are asking, but how do I know what columns I have? Here are two you can use to find out the names of the columns that are available to you, please remember that you should replace `data` with whatever you have selected as the name of your dataframe, like perhaps `df` if you are going off the standard acronym commonly utilized: 
@@ -153,7 +209,7 @@ data.pivot_table(index='row_name', columns='column_name', values='values_column'
 
 #### Synthetic Dataset
 
-Now lets create a synthetic dataset to illustrate these functions.
+Now lets create another synthetic dataset to illustrate these functions.
 
 ```python
 import numpy as np
@@ -191,19 +247,19 @@ print(data.head())
 ```text
 
 
-Patient Name	Diagnosis	Age	Cholesterol	Blood Pressure	Gender
-0	Tammy Johns	Cardiovascular Disease	37	243	146	Male
-1	Amy Duncan	Healthy	45	172	98	Female
-2	Edward Sexton	Diabetes	63	164	99	Female
-3	Tina Smith	Cardiovascular Disease	53	192	150	Female
-4	Nathaniel Ross	Cardiovascular Disease	29	178	131	Female
-...	...	...	...	...	...	...
-95	Ann Zuniga	Hypertension	58	152	146	Male
-96	Christine Ross	Hypertension	68	169	97	Female
-97	Mark Cooke	Healthy	71	208	104	Female
-98	Jennifer Clark	Hypertension	51	185	133	Female
-99	Christopher Webster	Diabetes	23	168	137	Female
-100 rows × 6 columns
++----+----------------+--------------+-------+---------------+------------------+----------+
+|    | Patient Name   | Diagnosis    |   Age |   Cholesterol |   Blood Pressure | Gender   |
++====+================+==============+=======+===============+==================+==========+
+| 17 | Veronica Love  | Healthy      |    35 |           155 |              139 | Male     |
++----+----------------+--------------+-------+---------------+------------------+----------+
+| 75 | Jerry Pham     | Hypertension |    56 |           181 |              140 | Male     |
++----+----------------+--------------+-------+---------------+------------------+----------+
+| 43 | William Reeves | Healthy      |    70 |           173 |              114 | Female   |
++----+----------------+--------------+-------+---------------+------------------+----------+
+| 88 | Eric Bowers    | Healthy      |    34 |           165 |              103 | Female   |
++----+----------------+--------------+-------+---------------+------------------+----------+
+|  5 | Jay Wise       | Healthy      |    55 |           185 |              112 | Female   |
++----+----------------+--------------+-------+---------------+------------------+----------+
 
 ```
 

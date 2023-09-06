@@ -25,6 +25,10 @@ The mean, or average, is a fundamental descriptive statistic that holds signific
 ### Standard Deviation (SD)
 
 The standard deviation is a crucial statistical measure that is closely linked to the mean. It provides valuable insights into the spread or dispersion of data points around the mean. First, the standard deviation measures the average amount by which individual data points in a dataset deviate from the mean. In other words, it quantifies the spread or dispersion of data around the mean. **A small standard deviation indicates that data points are close to the mean, while a larger standard deviation suggests that data points are more spread out**. 
+
+![Standard Deviation Chart with Z-scores and Percentages](../../static/img/ch3/distribution_sd_z_scores.png)
+
+[Image Source](https://www.statisticshowto.com/wp-content/uploads/2013/09/The_Normal_Distribution.svg_1.png)
   
 - Relationship to the mean: The standard deviation and the mean have a strong relationship. When data points are clustered closely around the mean, the standard deviation is small. Conversely, when data points are more widely spread out from the mean, the standard deviation is larger.
   - In a symmetric, normal distribution, the mean and standard deviation are closely related. The standard deviation gives you an idea of how data points are dispersed around the mean. In a normal distribution, about 68% of the data falls within one standard deviation of the mean, about 95% falls within two standard deviations, and about 99.7% falls within three standard deviations.
