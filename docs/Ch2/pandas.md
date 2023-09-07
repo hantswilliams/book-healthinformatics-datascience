@@ -450,9 +450,11 @@ def clean_column_names(df):
     # Define a helper function to clean column names
     def clean_name(name):
         cleaned_name = re.sub(r'[^a-zA-Z0-9]', '', name)
-        return cleaned_name.lower()
+        return cleaned_name.lower() 
 
     # Rename columns using the helper function
+    # This is using a list comprehend - e.g., we have a list to the right of the equals sign,
+    # and inside the list, we are applying our function, for every col (or X) that exists in df.columns 
     df.columns = [clean_name(col) for col in df.columns]
     return df
 
