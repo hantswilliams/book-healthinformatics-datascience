@@ -439,17 +439,30 @@ If you have a dataset with numerous columns, you can create a reusable function 
 import pandas as pd
 import re
 
+data = pd.DataFrame({
+    'Bad Column 1!': [1, 2, 3],
+    'Another_Column@2': [4, 5, 6],
+    'FINAL Column-3': [7, 8, 9]
+})
+
 # Function to remove white space and special characters from a value
-def clean_value(value):
-    cleaned_value = re.sub(r'\s+|[^a-zA-Z0-9]', '', value)
-    return cleaned_value
+def clean_column_names(df):
+    # Define a helper function to clean column names
+    def clean_name(name):
+        cleaned_name = re.sub(r'[^a-zA-Z0-9]', '', name)
+        return cleaned_name.lower()
+
+    # Rename columns using the helper function
+    df.columns = [clean_name(col) for col in df.columns]
+    return df
 
 # Apply the clean_value function to all columns
-for column in data.columns:
-    data[column] = data[column].apply(clean_value)
+data = clean_column_names(data)
 
 print(data)
 ```
+
+
 
 
 ### Handling Missing Values
