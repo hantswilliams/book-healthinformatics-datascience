@@ -605,6 +605,98 @@ data = data[z_scores <= threshold]
 
 By identifying and removing duplicates and outliers, you ensure that your analysis is based on reliable and accurate data, leading to more meaningful insights in healthcare research and decision-making.
 
+## Creating New Columns in Healthcare Data
+
+In healthcare data analysis, once we have cleaned up our dataset and are happy with the existing structure, we may next begin to create new columns. This is a common practice to enhance the dataset's information and facilitate further analysis. New columns, and columns may are also often referred to as features, variables, or predictors (just depends on who you are talking with) can provide valuable insights and simplify data interpretation. Here are a few healthcare-specific examples below of creating new columns using Python and the Pandas library.
+
+As a forwarning, we use the `apply` method and also use `lambda` (nameless functions) in this examples. If you are unfamiliar, please review [Chapter 1.12 - Important Python Concepts](../../docs/Ch1/python_commands.md)
+
+### Recategorizing Continuous Variables
+
+Suppose we have a continuous variable "Blood_Pressure" that represents blood pressure measurements. We want to create a new categorical variable called "Blood_Pressure_Status" to categorize individuals as having "Normal" or "High" blood pressure based on clinically defined thresholds. 
+
+```python
+# Generate a fake healthcare dataset
+num_patients = 100
+
+data = {
+    'Patient_ID': [fake.random_int(min=1000, max=9999) for _ in range(num_patients)],
+    'Blood_Pressure': [random.uniform(90, 180) for _ in range(num_patients)],
+}
+
+df = pd.DataFrame(data)
+
+# Define clinically defined thresholds for categorization
+threshold_high = 140
+
+# Create a new column "Blood_Pressure_Status" based on thresholds
+df['Blood_Pressure_Status'] = df['Blood_Pressure'].apply(lambda x: 'High' if x >= threshold_high else 'Normal')
+
+print(df[['Patient_ID', 'Blood_Pressure', 'Blood_Pressure_Status']].head(10))
+```
+
+### Aggregating Multiple Lab Values
+
+In some cases, we might have multiple columns containing lab values taken at different time points (e.g., baseline, 3 months, 6 months). We can create a new column called "Average_Lab_Value" that calculates the mean of these lab values for each individual. This aggregated value can provide a concise summary of the lab results over time.
+
+This example below generates a dataset with patient IDs and lab values at different time points. It then creates a new column "Average_Lab_Value" that calculates the mean lab value across these time points for each patient.
+
+```python
+# Generate a fake healthcare dataset
+num_patients = 100
+
+data = {
+    'Patient_ID': [fake.random_int(min=1000, max=9999) for _ in range(num_patients)],
+    'Lab_Value_Baseline': [random.uniform(0, 100) for _ in range(num_patients)],
+    'Lab_Value_3Months': [random.uniform(0, 100) for _ in range(num_patients)],
+    'Lab_Value_6Months': [random.uniform(0, 100) for _ in range(num_patients)],
+}
+
+df = pd.DataFrame(data)
+
+# Calculate the mean of lab values across different time points
+df['Average_Lab_Value'] = df[['Lab_Value_Baseline', 'Lab_Value_3Months', 'Lab_Value_6Months']].mean(axis=1)
+
+print(df[['Patient_ID', 'Lab_Value_Baseline', 'Lab_Value_3Months', 'Lab_Value_6Months', 'Average_Lab_Value']].head(10))
+```
+
+### Simplifying Categorical Variables
+
+Example: Let's say we have a categorical variable called "Disease_Type," which has five distinct values representing different types of diseases. We want to simplify this variable to create a new column called "Is_Chronic," where values are either "Chronic" or "Non-Chronic" based on predefined criteria. For instance, if the disease type is diabetes or hypertension, we classify it as "Chronic"; otherwise, it's "Non-Chronic."
+
+Below we have a dataset with patient IDs, blood pressure values, and a new column "Blood_Pressure_Status" categorizing individuals' blood pressure as normal or high based on predefined thresholds.
+
+
+```python
+import pandas as pd
+import random
+from faker import Faker
+
+# Generate a fake healthcare dataset
+fake = Faker()
+num_patients = 100
+disease_types = ['Diabetes', 'Hypertension', 'Asthma', 'Influenza', 'Migraine']
+
+data = {
+    'Patient_ID': [fake.random_int(min=1000, max=9999) for _ in range(num_patients)],
+    'Disease_Type': [random.choice(disease_types) for _ in range(num_patients)],
+}
+
+df = pd.DataFrame(data)
+
+# Define criteria for classifying diseases as "Chronic"
+chronic_diseases = ['Diabetes', 'Hypertension']
+
+# Create a new column "Is_Chronic" based on the criteria
+df['Is_Chronic'] = df['Disease_Type'].apply(lambda x: 'Chronic' if x in chronic_diseases else 'Non-Chronic')
+
+print(df[['Patient_ID', 'Disease_Type', 'Is_Chronic']].head(10))
+
+```
+
+This code  generates a dataset with patient IDs, disease types, and a new column "Is_Chronic," classifying diseases as chronic or non-chronic.
+
+
 ---
 
 Pandas' versatility and functionality make it an indispensable tool for cleaning, preprocessing, and analyzing health informatics data. By using its powerful functions, you can ensure the accuracy and reliability of your insights.
