@@ -4,7 +4,11 @@ sidebar_position: 3
 
 # 3.3 Understanding Health Data Distribution
 
-Before embarking on in-depth analyses or predictive modeling, understanding the distribution of health data is paramount. Descriptive statistics provide an initial glimpse into the data's central tendency and spread, while distribution curves offer insights into the prevalence of specific medical conditions within a population. While traditional statistics often assume a normal distribution, healthcare data rarely adheres to this idealized curve.
+**Now that we have reviewed our data for missingness and outliers, we are ready to begin looking at the distributions of our data elements.** 
+
+Proior to embarking on in-depth analyses or predictive modeling, understanding the distribution of health data is paramount. 
+
+Descriptive statistics provide an initial glimpse into the data's central tendency and spread, while distribution curves offer insights into the prevalence of specific medical conditions within a population. While traditional statistics often assume a normal distribution, healthcare data rarely adheres to this idealized curve.
 
 This section will guide you through the fundamentals of descriptive statistics and distribution curves in the context of healthcare data. We'll showcase Python tools to calculate mean, median, variance, and visualize distribution curves. Furthermore, we'll explain the significance of various distribution shapes, including skewed, bimodal, and uniform, and provide real-world healthcare examples to contextualize these concepts.
 
@@ -46,9 +50,6 @@ The median is the middle value when data is ordered. It's a measure of central t
 ### Mode
 The mode is the most frequently occurring value in a dataset. Identifying the mode in healthcare data can highlight the most common symptom reported by patients, aiding in understanding prevalent conditions.
 
-### Variance
-Variance measures the spread or dispersion of data points from the mean. In healthcare, variance can indicate the variability of blood pressure readings within a patient population.
-
 ### Quantiles and Quartiles
 Quartiles and quantiles are both measures used to divide a dataset into specific segments or parts. Quantiles are a more general concept that includes quartiles as a specific case. Let's break down the differences and importance of each:
 
@@ -57,8 +58,17 @@ Quartiles and quantiles are both measures used to divide a dataset into specific
 - Second Quartile (Q2): This is the median of the data and divides it into two halves, with 50% of the data falling below and 50% above. It's also known as the 50th percentile.
 - Third Quartile (Q3): This is the value below which 75% of the data falls. It's also known as the 75th percentile.
 
+![Quartiles](../../static/img/ch3/quartile.svg)
+
+[Image Source](https://mathspace.co/textbooks/syllabuses/Syllabus-813/topics/Topic-18225/subtopics/Subtopic-248828/)
+
+
 **Quantiles**: Quantiles are a broader concept and refer to dividing a dataset into equal parts. While quartiles divide into four parts, other quantiles can divide data into any number of parts. For instance, quintiles divide into five parts, deciles into ten parts, and percentiles into 100 parts.
 - Percentiles: Percentiles are a common form of quantiles, where data is divided into 100 equal parts. The nth percentile is the value below which n% of the data falls.
+
+![Quantile](../../static/img/ch3/quantile.jpg)
+
+[Image Source](https://prepnuggets.com/glossary/quantile/)
 
 Quartiles and quantiles play a crucial role in healthcare data analysis for various reasons:
 
@@ -90,8 +100,66 @@ Let's take an example of cholesterol levels in a population and divide it into q
 - Group 3: Another 25% of individuals have cholesterol levels between 31.5 and 45.
 - Group 4: The top 25% of individuals have cholesterol levels above 45.
 
-### Range
+
+No, variance and range are not the same thing, but they are both measures of dispersion in a dataset. Let's break down each term:
+
+
+### Range:
+
 The range is the difference between the maximum and minimum values in a dataset. It can highlight the span of variation in health metrics like heart rate.
+
+   
+**Formula**: 
+
+$$
+ \text{Range} = \text{Maximum value} - \text{Minimum value}
+$$
+
+**Interpretation**: The range provides a simple measure of the overall spread of the data. It does not take into account the distribution of all the data points; instead, it is solely based on the two extreme values. Because of this, it can be very sensitive to outliers.
+
+
+### Variance:
+
+Variance measures the average of the squared differences from the mean for a set of data points. It quantifies the spread or dispersion of a set of data. In healthcare, variance can indicate the variability of blood pressure readings within a patient population. 
+
+**Formulas**:
+
+   For a sample: 
+
+   $$
+    s^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}
+   $$
+   
+   For a population: 
+
+   $$
+    sigma^2 = \frac{\sum_{i=1}^{N} (x_i - \mu)^2}{N} 
+   $$
+   
+   Where:
+   - $( x_i )$ represents each data point
+   - $( \bar{x} )$ is the sample mean
+   - $( \mu )$ is the population mean
+   - $( n )$ is the sample size
+   - $( N )$ is the population size
+
+**Interpretation**: Variance provides a measure of the data's spread in terms of the average squared deviation from the mean. A higher variance indicates greater dispersion. Since the units of variance are squared, the square root of variance gives the standard deviation, which is in the same units as the original data and is often more interpretable.
+
+
+
+### Differences:
+
+- **Calculation**: Variance takes into account each data point and its deviation from the mean, while the range only considers the maximum and minimum values.
+  
+- **Sensitivity to Outliers**: Range is highly sensitive to outliers since it only focuses on the extremes. Variance, while still influenced by outliers, considers all data points.
+  
+- **Units**: Variance is expressed in the squared units of the data, while the range is expressed in the original units of the data.
+
+In summary, while both variance and range provide information about the spread of a dataset, they are calculated differently and can give different insights. Variance provides a more comprehensive measure of dispersion, considering all data points, whereas the range offers a quick snapshot of the spread based on the two extreme values.
+
+
+
+
 
 ### Python Examples
 
