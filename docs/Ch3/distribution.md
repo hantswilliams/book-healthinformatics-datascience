@@ -104,7 +104,7 @@ Let's take an example of cholesterol levels in a population and divide it into q
 No, variance and range are not the same thing, but they are both measures of dispersion in a dataset. Let's break down each term:
 
 
-### Range:
+### Range
 
 The range is the difference between the maximum and minimum values in a dataset. It can highlight the span of variation in health metrics like heart rate.
 
@@ -118,9 +118,11 @@ $$
 **Interpretation**: The range provides a simple measure of the overall spread of the data. It does not take into account the distribution of all the data points; instead, it is solely based on the two extreme values. Because of this, it can be very sensitive to outliers.
 
 
-### Variance:
+### Variance
 
-Variance measures the average of the squared differences from the mean for a set of data points. It quantifies the spread or dispersion of a set of data. In healthcare, variance can indicate the variability of blood pressure readings within a patient population. 
+Variance measures the average of the squared differences from the mean for a set of data points. 
+
+It quantifies the spread or dispersion of a set of data. In healthcare, variance can indicate the variability of blood pressure readings within a patient population. 
 
 **Formulas**:
 
@@ -147,7 +149,7 @@ Variance measures the average of the squared differences from the mean for a set
 
 
 
-### Differences:
+### Differences
 
 - **Calculation**: Variance takes into account each data point and its deviation from the mean, while the range only considers the maximum and minimum values.
   
