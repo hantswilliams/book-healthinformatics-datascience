@@ -4,6 +4,8 @@ sidebar_position: 1
 
 # 3.1 Handling Missing Values in Clinical Data
 
+Before we get into explorating our data, we need to ensure we have a good handle on 'missingness'.
+
 In the realm of healthcare data analysis, handling missing values is a critical step to ensure the accuracy and reliability of insights derived from the data. Clinical data often comes from various sources, such as electronic health records (EHRs), medical imaging, or patient surveys, and these sources may introduce missing data due to data entry errors, incomplete records, or technical issues. However, working with incomplete data can lead to biased results and inaccurate interpretations, emphasizing the need for robust strategies to handle missing values effectively.
 
 Modern healthcare datasets can contain a wealth of information, but missing values can hinder our ability to extract meaningful insights. In this section, we will explore common approaches to handling missing values, ranging from removal and imputation to more advanced techniques. We'll delve into practical examples using Python and pandas, demonstrating how to detect and manage missing data efficiently.

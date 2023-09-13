@@ -1,10 +1,12 @@
 ---
-sidebar_position: 5
+sidebar_position: 7
 ---
 
-# 3.5 Visualization Techniques in Health EDA
+# 3.7 Visualization Techniques in Health EDA
 
 Visualizing healthcare data is an essential step in exploratory data analysis (EDA). Visualization techniques provide insights that raw numbers often fail to convey. By creating meaningful visual representations, patterns, trends, and anomalies within the data can be easily spotted, leading to better decision-making and actionable insights.
+
+In addition to the resources provided within this chapter section, we have a dedicated chapter to visualizations: [Chapter 4](../../docs/Ch4/visualization_intro.md)
 
 ## Why Visualization Matters in Healthcare
 

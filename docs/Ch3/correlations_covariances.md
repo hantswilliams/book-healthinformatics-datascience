@@ -1,8 +1,8 @@
 ---
-sidebar_position: 4
+sidebar_position: 5
 ---
 
-# 3.4 Correlations and Covariances in Medical Metrics
+# 3.5 Correlations and Covariances in Medical Metrics
 
 In healthcare, understanding relationships between medical metrics is invaluable for clinical decision-making and research. Correlations and covariances provide insights into how two variables change together, enabling us to uncover patterns and dependencies. For instance, correlations can highlight whether an increase in cholesterol levels corresponds to an increase in blood pressure.
 

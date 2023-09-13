@@ -1,8 +1,10 @@
 ---
-sidebar_position: 3
+sidebar_position: 2
 ---
 
-# 3.3 Outlier Detection and Handling in Health Data
+# 3.2 Outlier Detection and Handling in Health Data
+
+After handling missingness, we can now move on to outliers, and then finally the EDA. 
 
 Outliers, or extreme values, can significantly impact analyses and model performance in healthcare data. These anomalies can arise due to measurement errors, rare conditions, or other data irregularities. Detecting and appropriately handling outliers is crucial to maintaining the integrity of our insights.
 

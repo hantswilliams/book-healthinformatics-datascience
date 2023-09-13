@@ -79,7 +79,7 @@ To understand the size and shape of a loaded DataFrame, you can use the `.shape`
 print("Number of rows:", data.shape[0])
 print("Number of columns:", data.shape[1])
 ```
-## Row Uniqueness and Identifiers
+### Row Uniqueness and Identifiers
 In healthcare data, each row may represents a unique entity, such as a patient, medical visit, or treatment. It's essential to identify the unique identifier that distinguishes each entity. For instance, in a patient dataset, the Medical Record Number (MRN) could serve as the unique identifier. Knowing whether each row corresponds to a distinct entity or if there are duplicates helps prevent erroneous conclusions during analysis.
 
 Understanding the consistency of representations across rows is critical. For healthcare data, consistency could mean ensuring that the same patient, medical condition, or hospital is consistently represented throughout the dataset. Inaccuracies or variations in these representations can lead to misleading analyses and erroneous decision-making.
@@ -112,9 +112,15 @@ By previewing the data, you can quickly gauge the composition of your dataset an
 
 Consider a dataset containing patient medical records. Each row represents a patient visit to a hospital. The unique identifier might be the Visit ID. By confirming the uniqueness of each visit and verifying that patients, medical procedures, and diagnoses are consistently represented, you establish a solid foundation for meaningful analyses. Incorrect interpretations could arise if duplicate visits or inconsistent data representations are not addressed.
 
+
+
+
+
+## Data Cleaning and Preprocessing
+
 ### Working with Pandas Columns
 
-Pandas DataFrames have a powerful structure that allows you to access and manipulate data efficiently. Understanding how to work with columns is essential for performing data analysis tasks.
+Now before we get into cleaning, we need to know how to work with a pandas dataframe. Pandas DataFrames (DFs) have a powerful structure that allows you to access and manipulate data efficiently. So understanding how to work with columns is essential for performing data analysis tasks.
 
 #### DataFrame Indexing: Rows and Columns
 
@@ -124,7 +130,7 @@ A Pandas DataFrame is essentially a two-dimensional table with rows and columns.
 
 To access data within a DataFrame, you can use square brackets `[ ]`. You can use brackets to extract specific columns or rows from the DataFrame.
 
-##### Extracting Columns
+#### Extracting Columns
 
 To extract a specific column from the DataFrame, use the column name enclosed in single or double quotes within square brackets. You can see in the example below, we are first creating a new dataframe called `ages`, which contains only a single column, the column Age from our original dataframe. In the second part, we are creating another new dataframe called `subset` which contains two columns our from original dataframe: Name and Location. 
 
@@ -147,13 +153,315 @@ list(data)
 data.columns
 ```
 
-##### Extracting Rows
-You can also use brackets to filter rows based on conditions.
+### Components of Data Cleaning
+
+Data cleaning and preprocessing serve as foundational pillars in ensuring the accuracy, reliability, and meaningfulness of your analyses. Effective data cleaning not only eradicates inconsistencies and inaccuracies but also paves the way for accurate interpretation and decision-making. Here are some essential tasks to consider when preparing your healthcare dataset:
+
+1. **Column Names and Consistency:** Start by ensuring clear, descriptive, and standardized column names. Meaningful column names enhance clarity and understanding, making it easier for you and your team to collaborate effectively. Inconsistent or confusing column labels can lead to misunderstandings and hinder your analysis.
+
+2. **Handling Special Characters:** Special characters and spaces within column names can lead to syntax errors and difficulties in code execution. Eliminate special characters and replace spaces with underscores to maintain compatibility across different analysis tools.
+
+3. **Managing Null Values:** Null values or missing data are common in healthcare datasets. Understanding the nature of missingness and employing appropriate strategies, such as imputation or exclusion, is essential. Ignoring or mishandling missing values can lead to skewed results and inaccurate conclusions.
+
+4. **Data Types and Conversion:** Ensure that data types are correctly assigned to each column. Incorrect data types can impede analysis and lead to unexpected errors. Convert data types as needed, ensuring consistency and accuracy throughout your analysis.
+
+5. **Removing Duplicates:** Duplicate records can skew statistical calculations and distort patterns. Identify and remove duplicate rows based on appropriate criteria to prevent misleading results.
+
+6. **Outlier Detection and Treatment:** Healthcare data can sometimes include outliers that affect statistical measures. Identifying outliers and deciding whether to retain, transform, or remove them depends on the context of your analysis and domain knowledge.
+
+By addressing these fundamental data cleaning tasks, you establish a solid foundation for subsequent analyses and ensure that your conclusions are based on accurate, reliable, and trustworthy insights. Always approach data cleaning as an iterative process, continuously refining your approach as you gain deeper insights into your healthcare dataset.
+
+
+
+### Removing White Space and Special Characters
+Whitespace and special characters in column names or values can lead to errors in analysis. Pandas allows you to remove leading and trailing white space from column values using the `.str.strip()` method.
 
 ```python
-# Extract rows where Age is greater than 25
-filtered_data = data[data['Age'] > 25]
+# Remove leading and trailing white space from a column
+data['Name'] = data['Name'].str.strip()
 ```
+
+If you have a dataset with numerous columns, you can create a reusable function to remove special characters and white space. The built-in [re](https://docs.python.org/3/library/re.html) package enables you to find and manipulate characters within a string. The following example demonstrates how to use the clean_value function to remove special characters and white space from multiple columns:
+
+
+```python
+import pandas as pd
+import re
+
+data = pd.DataFrame({
+    'Bad Column 1!': [1, 2, 3],
+    'Another_Column@2': [4, 5, 6],
+    'FINAL Column-3': [7, 8, 9]
+})
+
+# Function to remove white space and special characters from a value
+def clean_column_names(df):
+    # Define a helper function to clean column names
+    def clean_name(name):
+        cleaned_name = re.sub(r'[^a-zA-Z0-9]', '', name)
+        return cleaned_name.lower() 
+
+    # Rename columns using the helper function
+    # This is using a list comprehend - e.g., we have a list to the right of the equals sign,
+    # and inside the list, we are applying our function, for every col (or X) that exists in df.columns 
+    df.columns = [clean_name(col) for col in df.columns]
+    return df
+
+# Apply the clean_value function to all columns
+data = clean_column_names(data)
+
+print(data)
+```
+
+
+
+
+### Handling Missing Values
+Missing values are a common issue in real-world datasets. Pandas provides methods like `.isnull()` and `.dropna()` to identify and handle missing values. Additionally, you can use the `.fillna()` method to fill missing values with a specified value.
+
+For a more detailed version of handling missing data, as well as imputation techniques for filling in missing data, please refer to [Chapter 3.1 - Handling Missing Data](../../docs/Ch3/missingdata.md)
+
+```python
+# Check for missing values in a column
+print(data['Age'].isnull().sum())
+
+# Drop rows with any missing values
+data.dropna(inplace=True)
+
+# Fill missing values in a column with a specific value
+data['Weight'].fillna(0, inplace=True)
+
+# Or if we want to fill missing values for all columns:
+data.fillna(0, inplace=True)
+```
+
+### Ensuring Data Types
+
+Ensuring that columns have the correct data types is essential. You can check the data types of columns using the `.dtypes` attribute and convert columns to desired data types using the `.astype()` method.
+
+**Checking Data Types**:
+```python
+# Check data types of columns
+data_types = data.dtypes
+print(data_types)
+```
+
+**Converting Data Types**:
+```python
+# Convert a column to a specific data type
+data['Height'] = data['Height'].astype(float)
+
+# Convert a column using a custom function
+def convert_to_percentage(value):
+    return value * 100
+
+data['SuccessRate'] = data['SuccessRate'].apply(convert_to_percentage)
+```
+### Handling Categorical Data
+Categorical columns, such as zip codes, should be treated as strings to avoid unintentional numerical operations. Use the `.astype(str)` method to ensure these columns are treated as strings.
+
+```python
+# Convert a categorical column to string
+data['ZipCode'] = data['ZipCode'].astype(str)
+```
+
+### Removing Duplicates and Outlier Detection and Treatment
+
+Ensuring the integrity of your data involves identifying and addressing duplicate entries and outliers. Duplicates can skew analyses and lead to inaccurate conclusions. Pandas provides functions to detect and remove duplicates:
+
+```python
+# Identify and remove duplicate rows
+data.drop_duplicates(inplace=True)
+```
+
+Outliers are extreme data points that can distort statistical analyses. Detecting and addressing outliers is particularly crucial in healthcare, where data anomalies can impact patient outcomes and research results. You can use statistical methods, such as the Z-score, or domain knowledge to identify outliers. Alongside Pandas, the widely-used NumPy library provides powerful numerical and mathematical tools that can enhance the accuracy and effectiveness of outlier detection and analysis. We will explore more examples of NumPy's capabilities later. 
+
+Lets first create some outliers:
+
+```python
+
+import numpy as np
+import pandas as pd
+from faker import Faker
+
+fake = Faker()
+
+# Generate a sample dataset
+num_records = 1000
+data = pd.DataFrame({
+    'Name': [fake.name() for _ in range(num_records)],
+    'avgHeartRate': [fake.random_int(min=50, max=130) for _ in range(num_records)]
+})
+
+# Introduce some outliers
+outliers_to_insert = 10  # for demonstration purposes
+for _ in range(outliers_to_insert):
+    data.at[fake.random_int(min=0, max=num_records-1), 'avgHeartRate'] = fake.random_int(min=200, max=250)  # these are our outliers
+```
+
+```text
+
+	Name	avgHeartRate
+0	Kellie Ray	80
+1	Frederick Kim	61
+2	Christopher Tran	73
+3	Steven Clark	80
+4	Deborah Willis	116
+...	...	...
+995	Gina West	77
+996	Jessica Schwartz	116
+997	Jeffrey Barnes	76
+998	Jacqueline Peterson	99
+999	Jennifer Harris	60
+
+```
+
+Now lets calculate the z-scores. The Z-score measures how many standard deviations an observation is away from the mean. If the Z-score is above a certain threshold (usually 2 or 3), the data point is considered an outlier.
+
+
+```python
+
+# Calculate the Z-score for a column
+z_scores = np.abs((data['avgHeartRate'] - data['avgHeartRate'].mean()) / data['avgHeartRate'].std())
+
+# Add Z-scores as a new column in the dataframe
+data['Z_Scores'] = z_scores
+
+# Define a threshold for outlier detection
+threshold = 3
+
+# Identify and treat outliers
+outliers = data[z_scores > threshold]
+data = data[z_scores <= threshold]
+
+```
+
+**Outliers**:
+
+```text
+
+                  Name  avgHeartRate  Z_Scores
+250    Miranda Barnes           226  4.998898
+340    Maurice Walter           215  4.589857
+351     Bruce Carlson           226  4.998898
+386      Aaron Malone           243  5.631054
+458      Cynthia Pena           242  5.593868
+578  Robert Alexander           213  4.515485
+631    Austin Coleman           231  5.184826
+655     Ronald Willis           208  4.329557
+902        Adam Casey           228  5.073269
+919   Patricia Santos           219  4.738599
+
+```
+
+By identifying and removing duplicates and outliers, you ensure that your analysis is based on reliable and accurate data, leading to more meaningful insights in healthcare research and decision-making.
+
+
+
+
+
+
+
+
+
+
+## Creating New Columns in Healthcare Data
+
+In healthcare data analysis, once we have cleaned up our dataset and are happy with the existing structure, we may next begin to create new columns. This is a common practice to enhance the dataset's information and facilitate further analysis. New columns, and columns may are also often referred to as features, variables, or predictors (just depends on who you are talking with) can provide valuable insights and simplify data interpretation. Here are a few healthcare-specific examples below of creating new columns using Python and the Pandas library.
+
+As a forwarning, we use the `apply` method and also use `lambda` (nameless functions) in this examples. If you are unfamiliar, please review [Chapter 1.12 - Important Python Concepts](../../docs/Ch1/python_commands.md)
+
+### Recategorizing Continuous Variables
+
+Suppose we have a continuous variable "Blood_Pressure" that represents blood pressure measurements. We want to create a new categorical variable called "Blood_Pressure_Status" to categorize individuals as having "Normal" or "High" blood pressure based on clinically defined thresholds. 
+
+```python
+# Generate a fake healthcare dataset
+num_patients = 100
+
+data = {
+    'Patient_ID': [fake.random_int(min=1000, max=9999) for _ in range(num_patients)],
+    'Blood_Pressure': [random.uniform(90, 180) for _ in range(num_patients)],
+}
+
+df = pd.DataFrame(data)
+
+# Define clinically defined thresholds for categorization
+threshold_high = 140
+
+# Create a new column "Blood_Pressure_Status" based on thresholds
+df['Blood_Pressure_Status'] = df['Blood_Pressure'].apply(lambda x: 'High' if x >= threshold_high else 'Normal')
+
+print(df[['Patient_ID', 'Blood_Pressure', 'Blood_Pressure_Status']].head(10))
+```
+
+### Aggregating Multiple Lab Values
+
+In some cases, we might have multiple columns containing lab values taken at different time points (e.g., baseline, 3 months, 6 months). We can create a new column called "Average_Lab_Value" that calculates the mean of these lab values for each individual. This aggregated value can provide a concise summary of the lab results over time.
+
+This example below generates a dataset with patient IDs and lab values at different time points. It then creates a new column "Average_Lab_Value" that calculates the mean lab value across these time points for each patient.
+
+```python
+# Generate a fake healthcare dataset
+num_patients = 100
+
+data = {
+    'Patient_ID': [fake.random_int(min=1000, max=9999) for _ in range(num_patients)],
+    'Lab_Value_Baseline': [random.uniform(0, 100) for _ in range(num_patients)],
+    'Lab_Value_3Months': [random.uniform(0, 100) for _ in range(num_patients)],
+    'Lab_Value_6Months': [random.uniform(0, 100) for _ in range(num_patients)],
+}
+
+df = pd.DataFrame(data)
+
+# Calculate the mean of lab values across different time points
+df['Average_Lab_Value'] = df[['Lab_Value_Baseline', 'Lab_Value_3Months', 'Lab_Value_6Months']].mean(axis=1)
+
+print(df[['Patient_ID', 'Lab_Value_Baseline', 'Lab_Value_3Months', 'Lab_Value_6Months', 'Average_Lab_Value']].head(10))
+```
+
+### Simplifying Categorical Variables
+
+Example: Let's say we have a categorical variable called "Disease_Type," which has five distinct values representing different types of diseases. We want to simplify this variable to create a new column called "Is_Chronic," where values are either "Chronic" or "Non-Chronic" based on predefined criteria. For instance, if the disease type is diabetes or hypertension, we classify it as "Chronic"; otherwise, it's "Non-Chronic."
+
+Below we have a dataset with patient IDs, blood pressure values, and a new column "Blood_Pressure_Status" categorizing individuals' blood pressure as normal or high based on predefined thresholds.
+
+
+```python
+import pandas as pd
+import random
+from faker import Faker
+
+# Generate a fake healthcare dataset
+fake = Faker()
+num_patients = 100
+disease_types = ['Diabetes', 'Hypertension', 'Asthma', 'Influenza', 'Migraine']
+
+data = {
+    'Patient_ID': [fake.random_int(min=1000, max=9999) for _ in range(num_patients)],
+    'Disease_Type': [random.choice(disease_types) for _ in range(num_patients)],
+}
+
+df = pd.DataFrame(data)
+
+# Define criteria for classifying diseases as "Chronic"
+chronic_diseases = ['Diabetes', 'Hypertension']
+
+# Create a new column "Is_Chronic" based on the criteria
+df['Is_Chronic'] = df['Disease_Type'].apply(lambda x: 'Chronic' if x in chronic_diseases else 'Non-Chronic')
+
+print(df[['Patient_ID', 'Disease_Type', 'Is_Chronic']].head(10))
+
+```
+
+This code  generates a dataset with patient IDs, disease types, and a new column "Is_Chronic," classifying diseases as chronic or non-chronic.
+
+
+
+## Basic Descriptives 
+
+In this final section, we cover some basic descriptive statistical approaches to understanding our dataset. In [Chapter 3](../../docs/Ch3/missingdata.md) we describe in additional detail the approaches to conducting a Exploratory Data Analysis, otherwise known as a EDA. 
+
 
 ### Frequency Counts
 
@@ -404,297 +712,6 @@ Hypertension                17     9
 These pivot tables provide summarized views of the data based on specific groupings and metrics, allowing healthcare professionals to glean insights about different patient demographics and health metrics.
 
 
-
-
-## Data Cleaning and Preprocessing
-
-Data cleaning and preprocessing serve as foundational pillars in ensuring the accuracy, reliability, and meaningfulness of your analyses. Effective data cleaning not only eradicates inconsistencies and inaccuracies but also paves the way for accurate interpretation and decision-making. Here are some essential tasks to consider when preparing your healthcare dataset:
-
-**Column Names and Consistency:** Start by ensuring clear, descriptive, and standardized column names. Meaningful column names enhance clarity and understanding, making it easier for you and your team to collaborate effectively. Inconsistent or confusing column labels can lead to misunderstandings and hinder your analysis.
-
-**Handling Special Characters:** Special characters and spaces within column names can lead to syntax errors and difficulties in code execution. Eliminate special characters and replace spaces with underscores to maintain compatibility across different analysis tools.
-
-**Managing Null Values:** Null values or missing data are common in healthcare datasets. Understanding the nature of missingness and employing appropriate strategies, such as imputation or exclusion, is essential. Ignoring or mishandling missing values can lead to skewed results and inaccurate conclusions.
-
-**Data Types and Conversion:** Ensure that data types are correctly assigned to each column. Incorrect data types can impede analysis and lead to unexpected errors. Convert data types as needed, ensuring consistency and accuracy throughout your analysis.
-
-**Removing Duplicates:** Duplicate records can skew statistical calculations and distort patterns. Identify and remove duplicate rows based on appropriate criteria to prevent misleading results.
-
-**Outlier Detection and Treatment:** Healthcare data can sometimes include outliers that affect statistical measures. Identifying outliers and deciding whether to retain, transform, or remove them depends on the context of your analysis and domain knowledge.
-
-By addressing these fundamental data cleaning tasks, you establish a solid foundation for subsequent analyses and ensure that your conclusions are based on accurate, reliable, and trustworthy insights. Always approach data cleaning as an iterative process, continuously refining your approach as you gain deeper insights into your healthcare dataset.
-
-### Removing White Space and Special Characters
-Whitespace and special characters in column names or values can lead to errors in analysis. Pandas allows you to remove leading and trailing white space from column values using the `.str.strip()` method.
-
-```python
-# Remove leading and trailing white space from a column
-data['Name'] = data['Name'].str.strip()
-```
-
-If you have a dataset with numerous columns, you can create a reusable function to remove special characters and white space. The built-in [re](https://docs.python.org/3/library/re.html) package enables you to find and manipulate characters within a string. The following example demonstrates how to use the clean_value function to remove special characters and white space from multiple columns:
-
-
-```python
-import pandas as pd
-import re
-
-data = pd.DataFrame({
-    'Bad Column 1!': [1, 2, 3],
-    'Another_Column@2': [4, 5, 6],
-    'FINAL Column-3': [7, 8, 9]
-})
-
-# Function to remove white space and special characters from a value
-def clean_column_names(df):
-    # Define a helper function to clean column names
-    def clean_name(name):
-        cleaned_name = re.sub(r'[^a-zA-Z0-9]', '', name)
-        return cleaned_name.lower() 
-
-    # Rename columns using the helper function
-    # This is using a list comprehend - e.g., we have a list to the right of the equals sign,
-    # and inside the list, we are applying our function, for every col (or X) that exists in df.columns 
-    df.columns = [clean_name(col) for col in df.columns]
-    return df
-
-# Apply the clean_value function to all columns
-data = clean_column_names(data)
-
-print(data)
-```
-
-
-
-
-### Handling Missing Values
-Missing values are a common issue in real-world datasets. Pandas provides methods like `.isnull()` and `.dropna()` to identify and handle missing values. Additionally, you can use the `.fillna()` method to fill missing values with a specified value.
-
-```python
-# Check for missing values in a column
-print(data['Age'].isnull().sum())
-
-# Drop rows with any missing values
-data.dropna(inplace=True)
-
-# Fill missing values in a column with a specific value
-data['Weight'].fillna(0, inplace=True)
-
-# Or if we want to fill missing values for all columns:
-data.fillna(0, inplace=True)
-```
-
-### Ensuring Data Types
-
-Ensuring that columns have the correct data types is essential. You can check the data types of columns using the `.dtypes` attribute and convert columns to desired data types using the `.astype()` method.
-
-**Checking Data Types**:
-```python
-# Check data types of columns
-data_types = data.dtypes
-print(data_types)
-```
-
-**Converting Data Types**:
-```python
-# Convert a column to a specific data type
-data['Height'] = data['Height'].astype(float)
-
-# Convert a column using a custom function
-def convert_to_percentage(value):
-    return value * 100
-
-data['SuccessRate'] = data['SuccessRate'].apply(convert_to_percentage)
-```
-### Handling Categorical Data
-Categorical columns, such as zip codes, should be treated as strings to avoid unintentional numerical operations. Use the `.astype(str)` method to ensure these columns are treated as strings.
-
-```python
-# Convert a categorical column to string
-data['ZipCode'] = data['ZipCode'].astype(str)
-```
-
-### Removing Duplicates and Outlier Detection and Treatment
-
-Ensuring the integrity of your data involves identifying and addressing duplicate entries and outliers. Duplicates can skew analyses and lead to inaccurate conclusions. Pandas provides functions to detect and remove duplicates:
-
-```python
-# Identify and remove duplicate rows
-data.drop_duplicates(inplace=True)
-```
-
-Outliers are extreme data points that can distort statistical analyses. Detecting and addressing outliers is particularly crucial in healthcare, where data anomalies can impact patient outcomes and research results. You can use statistical methods, such as the Z-score, or domain knowledge to identify outliers. Alongside Pandas, the widely-used NumPy library provides powerful numerical and mathematical tools that can enhance the accuracy and effectiveness of outlier detection and analysis. We will explore more examples of NumPy's capabilities later. 
-
-Lets first create some outliers:
-
-```python
-
-import numpy as np
-import pandas as pd
-from faker import Faker
-
-fake = Faker()
-
-# Generate a sample dataset
-num_records = 1000
-data = pd.DataFrame({
-    'Name': [fake.name() for _ in range(num_records)],
-    'avgHeartRate': [fake.random_int(min=50, max=130) for _ in range(num_records)]
-})
-
-# Introduce some outliers
-outliers_to_insert = 10  # for demonstration purposes
-for _ in range(outliers_to_insert):
-    data.at[fake.random_int(min=0, max=num_records-1), 'avgHeartRate'] = fake.random_int(min=200, max=250)  # these are our outliers
-```
-
-```text
-
-	Name	avgHeartRate
-0	Kellie Ray	80
-1	Frederick Kim	61
-2	Christopher Tran	73
-3	Steven Clark	80
-4	Deborah Willis	116
-...	...	...
-995	Gina West	77
-996	Jessica Schwartz	116
-997	Jeffrey Barnes	76
-998	Jacqueline Peterson	99
-999	Jennifer Harris	60
-
-```
-
-Now lets calculate the z-scores. The Z-score measures how many standard deviations an observation is away from the mean. If the Z-score is above a certain threshold (usually 2 or 3), the data point is considered an outlier.
-
-
-```python
-
-# Calculate the Z-score for a column
-z_scores = np.abs((data['avgHeartRate'] - data['avgHeartRate'].mean()) / data['avgHeartRate'].std())
-
-# Add Z-scores as a new column in the dataframe
-data['Z_Scores'] = z_scores
-
-# Define a threshold for outlier detection
-threshold = 3
-
-# Identify and treat outliers
-outliers = data[z_scores > threshold]
-data = data[z_scores <= threshold]
-
-```
-
-**Outliers**:
-
-```text
-
-                  Name  avgHeartRate  Z_Scores
-250    Miranda Barnes           226  4.998898
-340    Maurice Walter           215  4.589857
-351     Bruce Carlson           226  4.998898
-386      Aaron Malone           243  5.631054
-458      Cynthia Pena           242  5.593868
-578  Robert Alexander           213  4.515485
-631    Austin Coleman           231  5.184826
-655     Ronald Willis           208  4.329557
-902        Adam Casey           228  5.073269
-919   Patricia Santos           219  4.738599
-
-```
-
-By identifying and removing duplicates and outliers, you ensure that your analysis is based on reliable and accurate data, leading to more meaningful insights in healthcare research and decision-making.
-
-## Creating New Columns in Healthcare Data
-
-In healthcare data analysis, once we have cleaned up our dataset and are happy with the existing structure, we may next begin to create new columns. This is a common practice to enhance the dataset's information and facilitate further analysis. New columns, and columns may are also often referred to as features, variables, or predictors (just depends on who you are talking with) can provide valuable insights and simplify data interpretation. Here are a few healthcare-specific examples below of creating new columns using Python and the Pandas library.
-
-As a forwarning, we use the `apply` method and also use `lambda` (nameless functions) in this examples. If you are unfamiliar, please review [Chapter 1.12 - Important Python Concepts](../../docs/Ch1/python_commands.md)
-
-### Recategorizing Continuous Variables
-
-Suppose we have a continuous variable "Blood_Pressure" that represents blood pressure measurements. We want to create a new categorical variable called "Blood_Pressure_Status" to categorize individuals as having "Normal" or "High" blood pressure based on clinically defined thresholds. 
-
-```python
-# Generate a fake healthcare dataset
-num_patients = 100
-
-data = {
-    'Patient_ID': [fake.random_int(min=1000, max=9999) for _ in range(num_patients)],
-    'Blood_Pressure': [random.uniform(90, 180) for _ in range(num_patients)],
-}
-
-df = pd.DataFrame(data)
-
-# Define clinically defined thresholds for categorization
-threshold_high = 140
-
-# Create a new column "Blood_Pressure_Status" based on thresholds
-df['Blood_Pressure_Status'] = df['Blood_Pressure'].apply(lambda x: 'High' if x >= threshold_high else 'Normal')
-
-print(df[['Patient_ID', 'Blood_Pressure', 'Blood_Pressure_Status']].head(10))
-```
-
-### Aggregating Multiple Lab Values
-
-In some cases, we might have multiple columns containing lab values taken at different time points (e.g., baseline, 3 months, 6 months). We can create a new column called "Average_Lab_Value" that calculates the mean of these lab values for each individual. This aggregated value can provide a concise summary of the lab results over time.
-
-This example below generates a dataset with patient IDs and lab values at different time points. It then creates a new column "Average_Lab_Value" that calculates the mean lab value across these time points for each patient.
-
-```python
-# Generate a fake healthcare dataset
-num_patients = 100
-
-data = {
-    'Patient_ID': [fake.random_int(min=1000, max=9999) for _ in range(num_patients)],
-    'Lab_Value_Baseline': [random.uniform(0, 100) for _ in range(num_patients)],
-    'Lab_Value_3Months': [random.uniform(0, 100) for _ in range(num_patients)],
-    'Lab_Value_6Months': [random.uniform(0, 100) for _ in range(num_patients)],
-}
-
-df = pd.DataFrame(data)
-
-# Calculate the mean of lab values across different time points
-df['Average_Lab_Value'] = df[['Lab_Value_Baseline', 'Lab_Value_3Months', 'Lab_Value_6Months']].mean(axis=1)
-
-print(df[['Patient_ID', 'Lab_Value_Baseline', 'Lab_Value_3Months', 'Lab_Value_6Months', 'Average_Lab_Value']].head(10))
-```
-
-### Simplifying Categorical Variables
-
-Example: Let's say we have a categorical variable called "Disease_Type," which has five distinct values representing different types of diseases. We want to simplify this variable to create a new column called "Is_Chronic," where values are either "Chronic" or "Non-Chronic" based on predefined criteria. For instance, if the disease type is diabetes or hypertension, we classify it as "Chronic"; otherwise, it's "Non-Chronic."
-
-Below we have a dataset with patient IDs, blood pressure values, and a new column "Blood_Pressure_Status" categorizing individuals' blood pressure as normal or high based on predefined thresholds.
-
-
-```python
-import pandas as pd
-import random
-from faker import Faker
-
-# Generate a fake healthcare dataset
-fake = Faker()
-num_patients = 100
-disease_types = ['Diabetes', 'Hypertension', 'Asthma', 'Influenza', 'Migraine']
-
-data = {
-    'Patient_ID': [fake.random_int(min=1000, max=9999) for _ in range(num_patients)],
-    'Disease_Type': [random.choice(disease_types) for _ in range(num_patients)],
-}
-
-df = pd.DataFrame(data)
-
-# Define criteria for classifying diseases as "Chronic"
-chronic_diseases = ['Diabetes', 'Hypertension']
-
-# Create a new column "Is_Chronic" based on the criteria
-df['Is_Chronic'] = df['Disease_Type'].apply(lambda x: 'Chronic' if x in chronic_diseases else 'Non-Chronic')
-
-print(df[['Patient_ID', 'Disease_Type', 'Is_Chronic']].head(10))
-
-```
-
-This code  generates a dataset with patient IDs, disease types, and a new column "Is_Chronic," classifying diseases as chronic or non-chronic.
 
 
 ---

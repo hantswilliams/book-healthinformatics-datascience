@@ -1,8 +1,8 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 ---
 
-# 3.2 Understanding Health Data Distribution
+# 3.3 Understanding Health Data Distribution
 
 Before embarking on in-depth analyses or predictive modeling, understanding the distribution of health data is paramount. Descriptive statistics provide an initial glimpse into the data's central tendency and spread, while distribution curves offer insights into the prevalence of specific medical conditions within a population. While traditional statistics often assume a normal distribution, healthcare data rarely adheres to this idealized curve.
 
@@ -249,6 +249,32 @@ print("Data Range (Age):", data_range_age)
 print("Correlation Matrix 1:\n", correlation_matrix_1)
 print("Covariance Matrix 2:\n", covariance_matrix_2)
 ```
+
+```yaml
+
+Mean Blood Pressure: 205.631
+Median Cholesterol: 224.5
+Mode Glucose: 199
+Variance Glucose Blood Pressure: 554.9088390000001
+Standard Deviation Blood Pressure: 23.556503114851324
+25th Percentile Glucose: 103.0
+75th Percentile Glucose: 169.0
+Data Range (Age): 72
+
+Correlation Matrix 1:
+                   BMI  Total_BP  Cholesterol
+BMI          1.000000  0.065241    -0.067406
+Total_BP     0.065241  1.000000    -0.005787
+Cholesterol -0.067406 -0.005787     1.000000
+
+Covariance Matrix 2:
+               Glucose         Age    Total_BP
+Glucose   1456.811122   -3.300794   35.696023
+Age         -3.300794  464.420179   -7.836738
+Total_BP    35.696023   -7.836738  555.464303
+
+
+```
   
 ## Distribution Curves
 
@@ -320,6 +346,30 @@ So in summary, health data distribution curves can take various shapes, each pro
 Some common distribution shapes in healthcare data include:
 
 - **Normal Distribution (Bell Curve)**: While not always common in healthcare data, a normal distribution indicates that values cluster around the mean, with fewer extreme values. It suggests that health metrics are relatively consistent within the population.
+
+![Distribution Normal](../../static/img/ch3/distribution_normal.png)
+
+
+```python
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Generate data with a normal distribution
+mean = 0
+std_deviation = 1
+normal_data = np.random.normal(mean, std_deviation, 1000)
+
+plt.hist(normal_data, bins=30, density=True, alpha=0.7, color='blue', label='Normal Distribution')
+plt.title('Normal Distribution')
+plt.xlabel('Value')
+plt.ylabel('Probability Density')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+
+```
 
 - **Skewed Distribution**: A skewed distribution occurs when the data is asymmetric. Positively skewed data (skewed to the right) has a tail on the right side, indicating a larger number of lower values and fewer high values. Conversely, negatively skewed data (skewed to the left) has a tail on the left side, with more high values and fewer low values. Skewed distributions can arise from factors such as outliers or limitations in measurement precision.
 
@@ -404,7 +454,106 @@ In addition to these shapes, many other non-normal distributions exist:
 
 Python provides powerful libraries and tools for analyzing and visualizing distribution curves in health data. You can use these tools to gain insights into the shape of the data, identify outliers, and make informed decisions in healthcare analysis. Here are some ways you can use Python for distribution analysis:
 
-### Visualizing Distributions
+
+
+### Skewness and Kurtosis
+
+Skewness provides information about the direction and amount of asymmetry in the data.
+Kurtosis indicates the propensity of the data to produce outliers or extreme values in the tails.
+
+#### Skewness
+Skewness measures the degree of asymmetry of a distribution. A positive value indicates a distribution that is skewed to the right (or positively skewed), while a negative value indicates a distribution that is skewed to the left (or negatively skewed). A value close to 0 suggests that the data distribution is approximately symmetric.
+
+*Interpretation of Skewness:*
+
+1. **Positive** skewness: The distribution's tail is on the right side. It means that the right tail is longer than the left tail. The mass of the distribution is concentrated on the left. This is also known as a right-skewed distribution.
+2. **Negative** skewness: The distribution's tail is on the left side. It means that the left tail is longer than the right tail. The mass of the distribution is concentrated on the right. This is also known as a left-skewed distribution.
+3. **Near zero**: If the skewness is close to zero (between -0.5 and 0.5 in many cases), then the dataset is considered fairly symmetrical.
+
+#### Kurotosis
+Kurtosis measures the "tailedness" of a distribution. It compares the tails of the distribution to the tails of a normal distribution. A distribution with a positive kurtosis value indicates that it has heavier tails than a normal distribution, while a negative kurtosis value indicates that it has lighter tails than a normal distribution.
+
+*Interpretation of Kurtosis:*
+
+![Kurtosis Interpretation](../../static/img/ch3/kurtosis_interpretation.png)
+
+[Image Source](https://www.researchgate.net/figure/Mesokurtic-leptokurtic-and-platykurtic_fig1_5570487)
+
+1. **Positive** kurtosis (*Leptokurtic - FAT tails*): The distribution has heavier tails and a sharper peak than a normal distribution. It indicates a large number of data values far from the mean (outliers).
+    - Kurtosis > 3 when using fisher=False
+    - The distribution also tends to have a sharper peak than a normal distribution.
+    - While a leptokurtic distribution may be "skinny" in the center, it features "fat tails"
+
+![Leptokurtic](../../static/img/ch3/qq_leptokurtic.png)
+
+2. **Negative** kurtosis (*Platykurtic - THIN tails*): The distribution has lighter tails and a flatter peak than a normal distribution. It suggests fewer outliers.
+    - Kurtosis < 3 when using fisher=False
+    - The distribution is flatter than a normal distribution
+
+![Platykurtic](../../static/img/ch3/qq_platokurtoic.png)
+
+3. **Zero** kurtosis (*Mesokurtic*): The distribution has the same kurtosis as a normal distribution. It doesn't imply that the distribution is normal, only that its kurtosis is similar to that of a normal distribution.
+    - Kurtosis ~3 when using fisher=False
+    - This distribution has the same kurtosis as the normal distribution.
+
+![Normal](../../static/img/ch3/qq_normal.png)
+
+**SciPy**: You can calculate skewness and kurtosis to quantify the degree of skewness and the shape of the tails in your data distribution.
+
+```python
+import numpy as np
+import pandas as pd
+from scipy.stats import skew, kurtosis
+from faker import Faker
+
+fake = Faker()
+
+# Number of data points
+n = 1000
+
+# Generate fake patient names
+patients = [fake.name() for _ in range(n)]
+
+# Generate heart rates that are positively skewed.
+# Most patients will have heart rates around 70-80, but some will have higher rates.
+heart_rates = np.concatenate([np.random.normal(loc=75, scale=5, size=int(n*0.95)),
+                              np.random.normal(loc=120, scale=5, size=int(n*0.05))])
+
+# Create a DataFrame to store the data
+data = pd.DataFrame({
+    'patient': patients,
+    'heart_rate': heart_rates
+})
+
+# Calculate skewness and kurtosis
+skewness = skew(data['heart_rate'])
+kurt = kurtosis(data['heart_rate'], fisher=False)  # using fisher=False gives a mesokurtic normal distribution a value close to 3
+
+print(f"Skewness: {skewness}")
+print(f"Kurtosis: {kurt}")
+
+import matplotlib.pyplot as plt
+plt.hist(data['heart_rate'], bins=30)
+plt.title('Heart Rates Distribution')
+plt.xlabel('Heart Rate')
+plt.ylabel('Number of Patients')
+plt.show()
+
+```
+
+```yaml
+
+Skewness: 2.9837908305203813
+Kurtosis: 12.797851079639026
+
+```
+
+![Skewness Kurtosis HR](../../static/img/ch3/skew_kurtosis_heartrate.png)
+
+
+
+
+## Visualizing Distributions
 
 **Matplotlib and Seaborn**: Matplotlib and Seaborn are popular data visualization libraries in Python. You can create histograms, density plots, box plots, and violin plots to visualize the distribution of health metrics. These plots help you quickly identify the shape of the data and the presence of outliers.
 
@@ -426,7 +575,26 @@ plt.show()
 
 ### Quantile-Quantile (QQ) Plots
 
+Quantile-Quantile (often abbreviated as QQ) plots are a powerful visual tool used in statistics to assess if a dataset follows a theoretical distribution, most commonly the normal distribution. By comparing the quantiles of your data to the quantiles of a chosen theoretical distribution, you can determine if your dataset deviates from that theoretical distribution and how.
+
+**How QQ Plots Work:**
+
+1. Quantiles: Quantiles are points in your data that partition it into equally sized, contiguous intervals. Common quantiles include the median (which divides the data into two halves) and quartiles (which divide the data into four parts).
+
+2. Plotting Method: In a QQ plot, the x-axis represents the quantiles from the theoretical distribution *while the y-axis represents the quantiles from your actual dataset*. If your data follows the theoretical distribution, the points on the QQ plot will closely follow a straight line.
+
+**Interpreting QQ Plots:**
+
+1. Straight Line: If the points on the QQ plot closely follow a straight line (usually a 45-degree line called the line of equality), it suggests that your data is well-modeled by the theoretical distribution.
+
+2. Deviations from the Line: If the points deviate from the line, it indicates that your data has some systematic differences from the theoretical distribution.
+    - Curved Patterns: Often seen in QQ plots of non-normal data. A S-shaped curve might suggest that the data has heavier tails than a normal distribution.
+    - Outliers: Points that stray far from the line in a QQ plot can suggest potential outliers in your dataset.
+
+3. Tail Behavior: The ends of the QQ plot (both the lower left and upper right) show the behavior of the tails of your distribution. If the points in these areas deviate significantly from the straight line, it suggests that the tails of your distribution are different from the tails of the theoretical distribution.
+
 **Statsmodels**: The Statsmodels library provides QQ plots that compare the quantiles of your data against the quantiles of a theoretical distribution. QQ plots help you assess whether your data follows a particular distribution, such as the normal distribution.
+
 
 ```python
 import statsmodels.api as sm
@@ -454,80 +622,6 @@ if p > 0.05:
 else:
     print("Temperature data does not follow a normal distribution.")
 ```
-
-### Skewness and Kurtosis
-
-**SciPy**: You can calculate skewness and kurtosis to quantify the degree of skewness and the shape of the tails in your data distribution.
-
-```python
-from scipy.stats import skew, kurtosis
-
-skewness = skew(data['heart_rate'])
-kurt = kurtosis(data['heart_rate'])
-
-print(f"Skewness: {skewness}")
-print(f"Kurtosis: {kurt}")
-```
-
-## Automated Exploratory Data Analysis (EDA) with Python
-
-Automated Exploratory Data Analysis (EDA) tools can significantly speed up the process of understanding your health data's distribution, identifying patterns, and gaining insights. These tools often provide a comprehensive overview of your data's characteristics without requiring manual scripting. Here are a few popular Python packages that can assist in automated EDA:
-
-### Pandas Profiling
-Pandas Profiling is a versatile library that generates a detailed summary report of your dataset. It provides essential statistics, correlation matrices, missing value analysis, and visualizations for each column. The generated report can help you quickly identify potential issues, relationships, and patterns in your data.
-
-```python
-import pandas as pd
-from pandas_profiling import ProfileReport
-
-# Load your dataset
-data = pd.read_csv('health_data.csv')
-
-# Generate the EDA report
-report = ProfileReport(data)
-report.to_file('eda_report.html')
-```
-
-### SweetViz
-SweetViz is another powerful library for automated EDA. It generates comparative visualizations between your dataset's target variable and other features, highlighting differences, correlations, and distribution disparities. It's especially useful for classification problems.
-
-```python
-import sweetviz as sv
-
-# Compare two datasets (e.g., before and after preprocessing)
-data_before = pd.read_csv('data_before.csv')
-data_after = pd.read_csv('data_after.csv')
-
-# Generate the comparison report
-report = sv.compare([data_before, 'Before Preprocessing'], [data_after, 'After Preprocessing'])
-report.show_html('eda_comparison_report.html')
-```
-
-### AutoViz
-AutoViz is designed to automatically visualize any dataset with minimal configuration. It generates a wide variety of charts and plots for each feature in your dataset. It can be particularly helpful for quickly understanding the distribution and relationship of variables.
-
-```python
-from autoviz.AutoViz_Class import AutoViz_Class
-
-# Load your dataset
-data = pd.read_csv('health_data.csv')
-
-# Generate the automated visualizations
-AV = AutoViz_Class()
-report = AV.AutoViz(filename='', dfte=data, depVar='target_column')
-```
-
-Importantly, while automated EDA tools are powerful and efficient for exploring smaller datasets, they can face challenges when dealing with larger datasets. Here are a few considerations to keep in mind:
-
-- *Performance and Memory Usage*: Automated EDA tools generate a wide range of visualizations and statistical summaries. With larger datasets, these tools may consume significant memory and processing power, leading to slower performance and potential memory issues.
-
-- *Configuring Relevance*: In large datasets, not all features or columns may be relevant to your analysis. Configuring the tools to only include the data elements you care about can help streamline the analysis and reduce the load on system resources.
-
-- *Customization*: Automated EDA tools often provide options for customization, allowing you to choose specific analyses, visualizations, and summaries that are most relevant to your analysis goals. This customization can help focus the analysis on critical aspects of the data.
-
-- *Parallel Processing*: Some tools offer parallel processing capabilities, which can help distribute the computational load across multiple cores or processors. This can improve performance when dealing with large datasets.
-
-In summary, these automated EDA tools help you generate comprehensive reports and visualizations without extensive manual coding. They are useful for quickly identifying trends, patterns, and potential issues in your health data. Keep in mind that while these tools are efficient, it's still important to perform domain-specific analyses and data validation to ensure the accuracy and reliability of your findings.
 
 
 

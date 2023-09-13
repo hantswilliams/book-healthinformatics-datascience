@@ -1,8 +1,8 @@
 ---
-sidebar_position: 7
+sidebar_position: 8
 ---
 
-# 3.7 Introduction to Medical Imaging EDA
+# 3.8 Introduction to Medical Imaging EDA
 
 # ***THIS SECTION IS INCOMPLETE***
 
