@@ -1,8 +1,10 @@
 ---
-sidebar_position: 6
+sidebar_position: 9
 ---
 
-# 4.6 Medical Imaging Visualization
+# 4.9 Medical Imaging Visualization
+
+# ***THIS SECTION IS INCOMPLETE***
 
 Beyond numerical data, visualization plays a pivotal role in medical imaging.
 

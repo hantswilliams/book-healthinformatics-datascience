@@ -4,6 +4,8 @@ sidebar_position: 7
 
 # 3.7 Introduction to Medical Imaging EDA
 
+# ***THIS SECTION IS INCOMPLETE***
+
 Medical imaging plays a crucial role in modern healthcare, enabling clinicians to visualize and diagnose various medical conditions. Exploratory Data Analysis (EDA) applied to medical images involves extracting insights and patterns from complex visual data. In this section, we'll explore the fundamental concepts and techniques used in medical imaging EDA.
 
 ## Types of Medical Imaging
