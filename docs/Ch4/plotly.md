@@ -2,7 +2,7 @@
 sidebar_position: 5
 ---
 
-# 4.5 Interactive Health Data Dashboards using Plotly and Dash
+# 4.5 Interactive Visuals
 
 This section introduces how to create interactive health data dashboards using the Plotly library. It covers the installation of Plotly, building interactive scatter plots, and creating complete interactive dashboards using the Dash framework. The provided code snippets demonstrate the creation of an interactive scatter plot and a simple interactive dashboard.
 

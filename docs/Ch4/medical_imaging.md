@@ -1,8 +1,8 @@
 ---
-sidebar_position: 9
+sidebar_position: 10
 ---
 
-# 4.9 Medical Imaging Visualization
+# 4.10 Medical Imaging Visualization
 
 # ***THIS SECTION IS INCOMPLETE***
 

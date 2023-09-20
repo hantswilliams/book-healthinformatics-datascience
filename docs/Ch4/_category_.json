@@ -1,8 +1,8 @@
 {
-    "label": "Chapter 4 - Data Visualization with Seaborn and Plotly",
+    "label": "Chapter 4 - Visualizations and Dashboards",
     "position": 5,
     "link": {
       "type": "generated-index",
-      "description": "Unveiling the potential of Seaborn and Plotly in transforming raw health data into compelling visual narratives."
+      "description": "Unveiling the potential of Seaborn and Plotly in transforming raw health data into compelling visual narratives, and the different tools and technologies available to create dashboards using these open source tools or other 3rd party vendors."
     }
 }
