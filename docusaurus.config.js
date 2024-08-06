@@ -10,7 +10,7 @@ const katex = require('rehype-katex');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Data Science for Health Informatists',
-  tagline: 'V0.1',
+  tagline: 'V0.2',
   url: 'https://book.datascience.appliedhealthinformatics.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',

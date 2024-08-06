@@ -2,6 +2,10 @@
 
 This book is built with [Docusaurus](https://v2.docusaurus.io)
 
+## Getting started on new computer
+- `pnpm run build` to build the book
+- `pnpm run serve` to start the book locally
+
 ## Parts that need to be updated:
 
 - [x] 1.10: Additional JSON examples of loading json data where the data (raw) is nested with a key:value pair and not at the top level 

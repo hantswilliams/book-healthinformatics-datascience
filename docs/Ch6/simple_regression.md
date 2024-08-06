@@ -521,3 +521,34 @@ Here's a table comparing the predicted blood pressure values for the first 5 ind
 | 4          | 122.27                   | 122.27                | 122.27           |
 | 5          | 112.33                   | 112.33                | 112.33           |
 
+## Challenges in Applying Regressions to Healthcare Data
+
+Given these unique characteristics, several challenges arise when applying regression techniques:
+
+### 1. Non-Linearity
+Health outcomes and predictors often have non-linear relationships. Standard linear regressions might not always be the best fit.
+
+**Dose-Response Curves** - The effect of a drug often follows a sigmoidal dose-response curve where, after a certain point, increasing the dose doesn't lead to significant increases in therapeutic effect but might increase the risk of side effects.
+
+**Age and Recovery** - Young patients and older patients might have different recovery times post-surgery. But the relationship isn't necessarily linear; middle-aged patients might recover faster than both very young and very old patients, illustrating a U-shaped curve.
+
+### 2. Confounding
+Given the interconnected nature of health data, there might be lurking variables that confound the relationship between predictors and outcomes.
+
+**Example 1**: A study might show that people who exercise frequently have reduced risks of heart disease. However, if these individuals also have healthier diets (the confounder), it could be the diet, not just the exercise, leading to reduced risks.
+
+**Example 2**: Patients in a hospital with more advanced medical equipment might show higher mortality rates. This could be confounded by the fact that such hospitals receive more critical cases, and it's the severity of the cases, not the equipment, that's influencing the mortality rate.
+
+### 3. Overfitting
+With a plethora of variables available in health datasets, there's a risk of creating models that fit too closely to the training data and perform poorly on new, unseen data.
+
+**Example 1**: A model designed to predict patient readmission might consider a myriad of lab tests, vital signs, and patient history. If not regularized, this model might perform exceptionally well on the training data but fail when applied to other patient datasets.
+
+**Example 2**: A machine learning model predicting the progression of a rare disease based on genetic markers, lifestyle factors, and environmental variables. If the model is too complex, it might identify patterns that are just noise and not truly representative of disease progression.
+
+### 4. Collinearity
+Health variables can be highly correlated. For example, weight and body mass index (BMI) in a dataset can introduce multicollinearity, which complicates interpretation and prediction.
+
+**Example 1**: In a study on obesity's effects on heart disease, including both weight and BMI as predictors can lead to multicollinearity. They are correlated, and their individual impacts on heart disease become hard to interpret.
+
+**Example 2**: A study exploring the impact of lifestyle on blood pressure might include both salt intake and processed food consumption. As processed foods often contain high levels of salt, these variables are correlated, complicating the analysis.

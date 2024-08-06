@@ -49,3 +49,40 @@ The National Institutes of Health (NIH) provides a variety of data sharing agree
 Remember that DUAs are legally binding agreements, and careful consideration of their terms is essential to protect the interests of all parties involved and to maintain data integrity and privacy.
 
 Please visit the official [NIH Institute of Center Data Sharing Policies](https://sharing.nih.gov/other-sharing-policies/nih-institute-and-center-data-sharing-policies) for examples. 
+
+
+## Python Libraries / Packages
+
+### What are they
+Python libraries or packages are collections of functions and methods that allow you to perform specific tasks without having to write the code from scratch. These libraries are designed to be reusable, efficient, and easy to use, making them essential tools for data analysis, machine learning, web development, and other applications.
+
+### Pypi
+The Python Package Index (PyPI) is a repository of software packages for the Python programming language. You can browse, search, and install Python packages from PyPI using tools like pip, the Python package manager. PyPI hosts thousands of open-source libraries and packages that you can use to enhance your Python projects.
+
+
+### Examples of popular python Libraries for data science and more...
+1. **Pandas**: A powerful data manipulation library that provides data structures and functions for working with structured data.
+    - [Pandas Documentation](https://pandas.pydata.org/pandas-docs/stable/)
+2. **NumPy**: A fundamental library for numerical computing that provides support for arrays, matrices, and mathematical operations.
+    - [NumPy Documentation](https://numpy.org/doc/stable/)
+3. **Seaborn**: A data visualization library based on Matplotlib that provides high-level functions for creating attractive and informative plots.
+    - [Seaborn Documentation](https://seaborn.pydata.org/)
+4. **Scikit-learn**: A machine learning library that provides tools for building predictive models and performing data analysis.
+    - [Scikit-learn Documentation](https://scikit-learn.org/stable/)
+5. **Requests**: A library for making HTTP requests and interacting with web APIs.
+    - [Requests Documentation](https://docs.python-requests.org/en/master/)
+6. **Beautiful Soup**: A library for parsing HTML and XML documents, useful for web scraping and data extraction.
+    - [Beautiful Soup Documentation](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
+7. **Flask**: A lightweight web framework for building web applications and APIs.
+    - [Flask Documentation](https://flask.palletsprojects.com/en/2.0.x/)
+8. **Sqlalchemy**: A SQL toolkit and Object-Relational Mapping (ORM) library for interacting with databases.
+    - [Sqlalchemy Documentation](https://docs.sqlalchemy.org/en/14/)
+9. **TensorFlow**: An open-source machine learning library developed by Google for building and training deep learning models.
+    - [TensorFlow Documentation](https://www.tensorflow.org/api_docs/python/tf)
+10. **PyTorch**: A machine learning library developed by Facebook for building neural networks and deep learning models.
+    - [PyTorch Documentation](https://pytorch.org/docs/stable/index.html)
+
+***Note:*** *This list is not exhaustive, and there are many other Python libraries available for various purposes. You can explore the Python Package Index (PyPI) to discover more libraries and packages that suit your needs.*
+
+---
+Page last updated: Aug 6, 2024
