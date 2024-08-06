@@ -84,5 +84,17 @@ The Python Package Index (PyPI) is a repository of software packages for the Pyt
 
 ***Note:*** *This list is not exhaustive, and there are many other Python libraries available for various purposes. You can explore the Python Package Index (PyPI) to discover more libraries and packages that suit your needs.*
 
+### Other resources / links 
+Below are some additional packages (links) that can be reviewed that contain list of medical / healthcare related python tooling: 
+
+- [Medium blog post; Medical Imaging](https://pycad.medium.com/the-best-python-libraries-for-medical-imaging-3327df061c0a)
+- [Medical Ai - Curated List](https://github.com/medtorch/awesome-healthcare-ai)
+- [Hants - Random Assortment of Healthcare Utilies](https://github.com/hantswilliams/healthcare-data)
+- [PyHealth - Python for Healthcare](https://pyhealth.readthedocs.io/en/latest/)
+- [EHRAPY - Electronic Health Records](https://github.com/theislab/ehrapy/)
+- [Python HL7 Parser](https://github.com/johnpaulett/python-hl7)
+- [Python SMART on FHIR Parser](https://github.com/smart-on-fhir/client-py)
+- [Python EDI 835 Parser](https://github.com/keironstoddart/edi-835-parser)
+
 ---
 Page last updated: Aug 6, 2024
