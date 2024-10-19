@@ -43,6 +43,12 @@ The process of acquiring health data is just the beginning. Extracting meaningfu
 For easy access and convenience, we have compiled all the links to these healthcare datasets and resources in a [GitHub repository](https://github.com/hantswilliams/healthcare-data). You can visit the repository to explore and discover more about each dataset and resource.
 
 Feel free to explore these datasets, resources, and tools to enhance your understanding of healthcare data and develop innovative solutions in the field of health informatics.
+
+### Federal data sets and resources
+
+<iframe src="https://docs.google.com/spreadsheets/d/17v3pvChW1CktD_U4mz-9w_EulAmC43-c6LlsEz9iGNE/edit?usp=sharing" width="100%" height="600" frameborder="0"></iframe>
+
+
 ### Unique Open Source Datasets
 
 - [Gun Violence Archive](https://www.gunviolencearchive.org/): Analyze comprehensive data related to gun violence incidents, including location, date, victims, and more.

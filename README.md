@@ -4,7 +4,7 @@ This book is built with [Docusaurus](https://v2.docusaurus.io)
 
 ## Getting started on new computer
 - `pnpm run build` to build the book
-- `pnpm run serve` to start the book locally
+- `pnpm run start` OR `pnpm run serve` to start the book locally
 
 ## Parts that need to be updated:
 
