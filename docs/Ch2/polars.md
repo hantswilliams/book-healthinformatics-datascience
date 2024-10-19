@@ -18,6 +18,11 @@ Polars is a great package to explore if your data is not soo large that it doesn
 
 But if your dataset is soo big that it can fit, or just barely fits on your personal computer, its time to move on to other solutions described in the [next section](/docs/Ch2/distributed-computation.md) like `ray` or `dask` which can be deployed across a cluster of machines. Polars does have the capability to perform distributed computation across many machines, with software like [fugue](https://fugue-tutorials.readthedocs.io/index.html), which may raise in popularity in the future.   
 
+#### Example with SPARCS Data
+- SPARCS data is a large dataset that contains information on patient discharges from hospitals in New York State. In the video below, we look at the difference in load times between Pandas and Polars for the SPARCS dataset.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/YoarGo3DNz4?si=MVPeIkjKzsstuKL2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 ### Similarities to pandas
 
 * Both Polars and Pandas are built on top of NumPy, so they can be used to work with tabular data.
