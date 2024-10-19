@@ -64,18 +64,18 @@ const config = {
     },
   ],
 
-  // Add the themes section with the search plugin
-  themes: [
-    // ... Your other themes.
-    [
-      "@easyops-cn/docusaurus-search-local",
-      ({
-        hashed: true,
-        // For Docs using Chinese, The `language` is recommended to set to:
-        // language: ["en", "zh"],
-      }),
-    ],
-  ],
+  // // Add the themes section with the search plugin
+  // themes: [
+  //   // ... Your other themes.
+  //   [
+  //     "@easyops-cn/docusaurus-search-local",
+  //     ({
+  //       hashed: true,
+  //       // For Docs using Chinese, The `language` is recommended to set to:
+  //       language: ["en"],
+  //     }),
+  //   ],
+  // ],
 
 
 
