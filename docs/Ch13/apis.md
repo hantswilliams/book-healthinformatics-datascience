@@ -8,6 +8,10 @@ n the following section, we'll explore practical examples of how to use APIs in 
 
 Application Programming Interfaces (APIs) play a crucial role in modern healthcare by enabling seamless data exchange and integration between different systems and applications. In a healthcare context, APIs facilitate the secure and efficient sharing of patient information, medical records, diagnostic results, and other critical data among healthcare providers, researchers, and patients.
 
+<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9030107" target="_blank">
+  <img src="/img/ch13/healthcare_apis.png" alt="APIs in Healthcare" style={{border: "2px solid #000", width: "50%", display: "block", marginLeft: "auto", marginRight: "auto"}} />
+</a>
+
 ## Role of APIs in Health Data Exchange
 
 In the healthcare landscape, various systems generate and store patient-related data, such as electronic health records (EHRs), laboratory information systems (LIS), picture archiving and communication systems (PACS), and more. These systems often use different data formats and protocols. APIs provide a standardized and interoperable way to connect these disparate systems, allowing for the secure transfer and access of patient data.
