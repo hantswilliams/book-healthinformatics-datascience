@@ -60,6 +60,10 @@ Feel free to explore these datasets, resources, and tools to enhance your unders
 - [CMS Medicare Claims PUF](https://www.cms.gov/Research-Statistics-Data-and-Systems/Downloadable-Public-Use-Files/BSAPUFS): Publicly available Medicare claims data that provides insights into healthcare utilization, costs, and more.
 - [MTSamples](https://www.mtsamples.com/): A collection of text samples for natural language processing (NLP) tasks in healthcare, including medical transcription examples.
 
+### Non-traditional to enrich datasets: 
+- [National Address Database](https://www.transportation.gov/gis/national-address-database)
+
+
 ### Other Healthcare Examples:
 - [CMS Medicare Physician and Other Practitioner](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners)
 - [CMS - Medicare - Hospital Operating Costs, Expenditures](https://data.cms.gov/provider-compliance/cost-report/hospital-provider-cost-report/)
