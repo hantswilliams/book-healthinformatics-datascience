@@ -52,6 +52,7 @@ Feel free to explore these datasets, resources, and tools to enhance your unders
 ### Unique Open Source Datasets
 
 - [Gun Violence Archive](https://www.gunviolencearchive.org/): Analyze comprehensive data related to gun violence incidents, including location, date, victims, and more.
+- [Urban Health](https://datacatalog.urban.org/): Access datasets on urban health issues, health insurance coverage, Medicaid, and other health policy topics.
 - [Social Capital](https://socialcapital.org): Explore datasets related to social determinants of health, offering valuable insights into the impact of social factors on population health outcomes.
 - [NY SDoH Resources](https://journals.sagepub.com/doi/full/10.1177/00469580231152318): A curated list of resources and data specific to social determinants of health in New York.
 - [All of Us (NIH)](https://databrowser.researchallofus.org/): Gain access to diverse datasets encompassing genetics, patient-reported outcomes, environmental factors, social determinants of health, and more.
